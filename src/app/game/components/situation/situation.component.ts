@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./situation.component.scss']
 })
 export class SituationComponent {
-
+  situationText: string = '123'
 }
