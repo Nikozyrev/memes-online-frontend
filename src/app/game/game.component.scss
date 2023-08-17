@@ -1,9 +1,18 @@
+.game-page {
+  width: 100vw;
+  height: 100vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .center {
-    display: flex;
-    gap: 5px;
+  display: flex;
+  gap: 5px;
 }
 
 .border {
-    display: block;
-    border: 1px solid black;
+  display: block;
+  border: 1px solid black;
 }
