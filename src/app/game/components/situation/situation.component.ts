@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-situation',
   templateUrl: './situation.component.html',
-  styleUrls: ['./situation.component.scss']
+  styleUrls: ['./situation.component.scss'],
 })
 export class SituationComponent {
-  situationText: string = '123'
+  situationText: string = 'Какая ситуация?!1';
 }
