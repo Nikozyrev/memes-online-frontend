@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { IMemesState } from '../memes-state.model';
-import * as MemesActions from '../actions/memes.actions';
+import { memesActions } from '../actions/memes.actions';
 
 const initialState: IMemesState = {
   memesHand: [],
@@ -9,7 +9,7 @@ const initialState: IMemesState = {
 export const memesReducer = createReducer(
   initialState,
   on(
-    MemesActions.getMemesSuccess,
+    memesActions.getMemesSuccess,
     (state, { memes }): IMemesState => ({ ...state, memesHand: memes })
   )
 );

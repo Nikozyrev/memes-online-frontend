@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { IMeme } from '../../models/meme.model';
-import * as MemesActions from '../../store/actions/memes.actions';
+import { memesActions } from '../../store/actions/memes.actions';
 import * as MemesSelectors from '../../store/selectors/memes.selectors';
 
 @Component({
@@ -18,6 +18,6 @@ export class HandComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.store.dispatch(MemesActions.getMemes());
+    this.store.dispatch(memesActions.getMemes());
   }
 }
