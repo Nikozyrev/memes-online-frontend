@@ -10,8 +10,7 @@ import { HandComponent } from './components/hand/hand.component';
 import { GameInfoComponent } from './components/game-info/game-info.component';
 import { SituationComponent } from './components/situation/situation.component';
 import { SelectedCardComponent } from './components/selected-card/selected-card.component';
-import { memesReducer } from './store/reducers/memes.reducers';
-import { memesFeatureName } from './store/selectors/memes.selectors';
+import { memesFeatureKey, memesReducer } from './store/reducers/memes.reducers';
 import { MemesEffects } from './store/effects/memes.effects';
 
 @NgModule({
@@ -26,7 +25,7 @@ import { MemesEffects } from './store/effects/memes.effects';
   imports: [
     CommonModule,
     GameRoutingModule,
-    StoreModule.forFeature(memesFeatureName, memesReducer),
+    StoreModule.forFeature(memesFeatureKey, memesReducer),
     EffectsModule.forFeature([MemesEffects]),
   ],
 })
