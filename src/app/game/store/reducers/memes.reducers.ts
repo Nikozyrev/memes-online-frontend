@@ -1,15 +1,24 @@
-import { createReducer, on } from '@ngrx/store';
+import { createFeature, createReducer, on } from '@ngrx/store';
 import { IMemesState } from '../memes-state.model';
-import * as MemesActions from '../actions/memes.actions';
+import { memesActions } from '../actions/memes.actions';
 
 const initialState: IMemesState = {
   memesHand: [],
 };
 
-export const memesReducer = createReducer(
-  initialState,
-  on(
-    MemesActions.getMemesSuccess,
-    (state, { memes }): IMemesState => ({ ...state, memesHand: memes })
-  )
-);
+const memesFeature = createFeature({
+  name: 'memes',
+  reducer: createReducer(
+    initialState,
+    on(
+      memesActions.getMemesSuccess,
+      (state, { memes }): IMemesState => ({ ...state, memesHand: memes })
+    )
+  ),
+});
+
+export const {
+  name: memesFeatureKey,
+  reducer: memesReducer,
+  selectMemesState,
+} = memesFeature;

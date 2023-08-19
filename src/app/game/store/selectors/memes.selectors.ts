@@ -1,12 +1,7 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { IMemesState } from '../memes-state.model';
-
-export const memesFeatureName = 'memes';
-
-export const selectFeature =
-  createFeatureSelector<IMemesState>(memesFeatureName);
+import { createSelector } from '@ngrx/store';
+import { selectMemesState } from '../reducers/memes.reducers';
 
 export const selectMemesHand = createSelector(
-  selectFeature,
+  selectMemesState,
   (state) => state.memesHand
 );
