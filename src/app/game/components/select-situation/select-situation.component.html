@@ -1,0 +1,8 @@
+<div class="modal">
+  <div class="select-situation" *ngIf="situations | async as situations">
+    <!-- TODO: Situation component -->
+    <div class="situation" *ngFor="let situation of situations">
+      <p>{{ situation.text }}</p>
+    </div>
+  </div>
+</div>

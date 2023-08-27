@@ -12,6 +12,7 @@ import { SituationComponent } from './components/situation/situation.component';
 import { SelectedCardComponent } from './components/selected-card/selected-card.component';
 import { memesFeatureKey, memesReducer } from './store/reducers/memes.reducers';
 import { MemesEffects } from './store/effects/memes.effects';
+import { SelectSituationComponent } from './components/select-situation/select-situation.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MemesEffects } from './store/effects/memes.effects';
     GameInfoComponent,
     SituationComponent,
     SelectedCardComponent,
+    SelectSituationComponent,
   ],
   imports: [
     CommonModule,
