@@ -13,6 +13,11 @@ import { SelectedCardComponent } from './components/selected-card/selected-card.
 import { memesFeatureKey, memesReducer } from './store/reducers/memes.reducers';
 import { MemesEffects } from './store/effects/memes.effects';
 import { SelectSituationComponent } from './components/select-situation/select-situation.component';
+import {
+  situationsFeatureKey,
+  situationsReducer,
+} from './store/reducers/situations.reducers';
+import { SituationsEffects } from './store/effects/situations.effects';
 
 @NgModule({
   declarations: [
@@ -28,7 +33,8 @@ import { SelectSituationComponent } from './components/select-situation/select-s
     CommonModule,
     GameRoutingModule,
     StoreModule.forFeature(memesFeatureKey, memesReducer),
-    EffectsModule.forFeature([MemesEffects]),
+    StoreModule.forFeature(situationsFeatureKey, situationsReducer),
+    EffectsModule.forFeature([MemesEffects, SituationsEffects]),
   ],
 })
 export class GameModule {}

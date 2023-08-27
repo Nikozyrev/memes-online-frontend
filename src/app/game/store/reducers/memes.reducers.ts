@@ -1,5 +1,5 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { IMemesState } from '../memes-state.model';
+import { IMemesState } from '../models/memes-state.model';
 import { memesActions } from '../actions/memes.actions';
 
 const initialState: IMemesState = {
