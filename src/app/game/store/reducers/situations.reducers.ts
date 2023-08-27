@@ -4,6 +4,7 @@ import { ISituationsState } from '../models/situations-state.model';
 
 const initialState: ISituationsState = {
   situationsToSelect: [],
+  selectedSituation: null,
 };
 
 const situationsFeature = createFeature({
@@ -15,6 +16,13 @@ const situationsFeature = createFeature({
       (state, { situationsToSelect }): ISituationsState => ({
         ...state,
         situationsToSelect,
+      })
+    ),
+    on(
+      situationsActions.selectSituation,
+      (state, { situation }): ISituationsState => ({
+        ...state,
+        selectedSituation: situation,
       })
     )
   ),

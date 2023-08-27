@@ -1,7 +1,11 @@
 <div class="modal">
   <div class="select-situation" *ngIf="situations | async as situations">
     <!-- TODO: Situation component -->
-    <div class="situation" *ngFor="let situation of situations">
+    <div
+      class="situation"
+      *ngFor="let situation of situations"
+      (click)="selectSituation(situation)"
+    >
       <p>{{ situation.text }}</p>
     </div>
   </div>

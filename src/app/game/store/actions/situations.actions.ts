@@ -9,5 +9,6 @@ export const situationsActions = createActionGroup({
       situationsToSelect: ISituation[];
     }>(),
     'Get Situations To Select Error': props<{ error: string }>(),
+    'Select Situation': props<{ situation: ISituation }>(),
   },
 });
