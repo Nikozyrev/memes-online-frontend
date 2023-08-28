@@ -1,1 +1,7 @@
-<p>selected-meme works!</p>
+<div class="selected-meme">
+  <app-meme
+    class="meme"
+    *ngIf="selectedMeme | async as selectedMeme"
+    [meme]="selectedMeme"
+  ></app-meme>
+</div>

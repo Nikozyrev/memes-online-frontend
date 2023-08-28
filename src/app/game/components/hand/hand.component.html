@@ -1,3 +1,8 @@
 <div class="hand">
-  <app-meme *ngFor="let meme of memes | async" [meme]="meme" class="card" />
+  <app-meme
+    *ngFor="let meme of memes | async"
+    [meme]="meme"
+    class="card"
+    (click)="selectMeme(meme)"
+  />
 </div>
