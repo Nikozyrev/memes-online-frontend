@@ -5,7 +5,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { GameRoutingModule } from './game-routing.module';
 import { GameComponent } from './components/game/game.component';
-import { CardComponent } from './components/card/card.component';
+import { MemeComponent } from './components/meme/meme.component';
 import { HandComponent } from './components/hand/hand.component';
 import { GameInfoComponent } from './components/game-info/game-info.component';
 import { SituationComponent } from './components/situation/situation.component';
@@ -23,13 +23,13 @@ import { SelectedSituationComponent } from './components/selected-situation/sele
 @NgModule({
   declarations: [
     GameComponent,
-    CardComponent,
     HandComponent,
     GameInfoComponent,
     SituationComponent,
     SelectedCardComponent,
     SelectSituationComponent,
     SelectedSituationComponent,
+    MemeComponent,
   ],
   imports: [
     CommonModule,
