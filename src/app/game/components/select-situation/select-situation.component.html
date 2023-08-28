@@ -1,0 +1,11 @@
+<div class="modal">
+  <div class="select-situation" *ngIf="situations | async as situations">
+    <app-situation
+      class="situation"
+      *ngFor="let situation of situations"
+      [situation]="situation"
+      (click)="selectSituation(situation)"
+    >
+    </app-situation>
+  </div>
+</div>

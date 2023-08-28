@@ -2,7 +2,11 @@
   <app-game-info class="border"></app-game-info>
   <div class="center">
     <app-selected-card class="border"></app-selected-card>
-    <app-situation class="border"></app-situation>
+    <app-selected-situation class="border"></app-selected-situation>
   </div>
   <app-hand class="border"></app-hand>
+
+  <app-select-situation
+    *ngIf="(isSituationSelected | async) === false"
+  ></app-select-situation>
 </div>

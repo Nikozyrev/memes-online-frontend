@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ISituation } from '../../models/situation.model';
 
 @Component({
   selector: 'app-situation',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./situation.component.scss'],
 })
 export class SituationComponent {
-  situationText: string = 'Какая ситуация?!1';
+  @Input({ required: true })
+  situation!: ISituation | null;
 }
