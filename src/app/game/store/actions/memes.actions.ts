@@ -7,5 +7,6 @@ export const memesActions = createActionGroup({
     'Get Memes': emptyProps(),
     'Get Memes Success': props<{ memes: IMeme[] }>(),
     'Get Memes Error': props<{ error: string }>(),
+    'Select Meme': props<{ meme: IMeme }>(),
   },
 });

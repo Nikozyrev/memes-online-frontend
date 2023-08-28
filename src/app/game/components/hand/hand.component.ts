@@ -20,4 +20,8 @@ export class HandComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(memesActions.getMemes());
   }
+
+  selectMeme(meme: IMeme) {
+    this.store.dispatch(memesActions.selectMeme({ meme }));
+  }
 }

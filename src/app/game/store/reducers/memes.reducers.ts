@@ -4,6 +4,7 @@ import { memesActions } from '../actions/memes.actions';
 
 const initialState: IMemesState = {
   memesHand: [],
+  selectedMeme: null,
 };
 
 const memesFeature = createFeature({
@@ -13,6 +14,10 @@ const memesFeature = createFeature({
     on(
       memesActions.getMemesSuccess,
       (state, { memes }): IMemesState => ({ ...state, memesHand: memes })
+    ),
+    on(
+      memesActions.selectMeme,
+      (state, { meme }): IMemesState => ({ ...state, selectedMeme: meme })
     )
   ),
 });

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectIsSituationSelected } from './store/selectors/situations.selectors';
+import { selectIsSituationSelected } from '../../store/selectors/situations.selectors';
 
 @Component({
   selector: 'app-game',

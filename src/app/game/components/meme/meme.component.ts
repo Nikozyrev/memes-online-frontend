@@ -2,10 +2,10 @@ import { Component, Input } from '@angular/core';
 import { IMeme } from '../../models/meme.model';
 
 @Component({
-  selector: 'app-card',
-  templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss'],
+  selector: 'app-meme',
+  templateUrl: './meme.component.html',
+  styleUrls: ['./meme.component.scss'],
 })
-export class CardComponent {
+export class MemeComponent {
   @Input() meme?: IMeme;
 }

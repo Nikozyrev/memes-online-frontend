@@ -1,0 +1,11 @@
+<div class="selected-meme">
+  <app-meme
+    class="meme"
+    *ngIf="selectedMeme | async as selectedMeme; else noMeme"
+    [meme]="selectedMeme"
+  ></app-meme>
+</div>
+
+<ng-template #noMeme>
+  <div class="no-meme">Мем не выбран</div>
+</ng-template>

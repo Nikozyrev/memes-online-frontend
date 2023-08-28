@@ -1,6 +1,10 @@
-<div
-  class="selected-situation"
-  *ngIf="selectedSituation | async as selectedSituation"
->
-  <app-situation [situation]="selectedSituation"></app-situation>
+<div class="selected-situation">
+  <app-situation
+    *ngIf="selectedSituation | async as selectedSituation; else noSituation"
+    [situation]="selectedSituation"
+  ></app-situation>
 </div>
+
+<ng-template #noSituation>
+  <div class="no-situation">Какая ситуация?!</div>
+</ng-template>
