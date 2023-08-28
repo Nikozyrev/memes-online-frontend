@@ -18,6 +18,7 @@ import {
   situationsReducer,
 } from './store/reducers/situations.reducers';
 import { SituationsEffects } from './store/effects/situations.effects';
+import { SelectedSituationComponent } from './components/selected-situation/selected-situation.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { SituationsEffects } from './store/effects/situations.effects';
     SituationComponent,
     SelectedCardComponent,
     SelectSituationComponent,
+    SelectedSituationComponent,
   ],
   imports: [
     CommonModule,
