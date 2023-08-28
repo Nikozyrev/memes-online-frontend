@@ -4,7 +4,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 import { GameRoutingModule } from './game-routing.module';
-import { GameComponent } from './game.component';
+import { GameComponent } from './components/game/game.component';
 import { CardComponent } from './components/card/card.component';
 import { HandComponent } from './components/hand/hand.component';
 import { GameInfoComponent } from './components/game-info/game-info.component';
