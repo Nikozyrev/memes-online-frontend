@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { combineLatest } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { IMeme } from '../../models/meme.model';
-import { selectMemesHand } from '../../store/selectors/player-memes.selectors';
+import {
+  selectRoundMemes,
+  selectRoundWinner,
+} from '../../store/selectors/round-results.selectors';
+import { roundResultsActions } from '../../store/actions/round-results.actions';
 
 @Component({
   selector: 'app-select-winner',
@@ -10,11 +14,14 @@ import { selectMemesHand } from '../../store/selectors/player-memes.selectors';
   styleUrls: ['./select-winner.component.scss'],
 })
 export class SelectWinnerComponent {
-  memes: Observable<IMeme[]> = this.store.select(selectMemesHand);
+  roundState = combineLatest({
+    memes: this.store.select(selectRoundMemes),
+    roundWinner: this.store.select(selectRoundWinner),
+  });
 
   constructor(private store: Store) {}
 
   selectWinner(meme: IMeme) {
-    // this.store.dispatch(memesActions.selectMeme({ meme }));
+    this.store.dispatch(roundResultsActions.selectWinner({ meme }));
   }
 }
