@@ -22,8 +22,5 @@ const playerMemesFeature = createFeature({
   ),
 });
 
-export const {
-  name: playerMemesFeatureKey,
-  reducer: playerMemesReducer,
-  selectPlayerMemesState,
-} = playerMemesFeature;
+export const { name: playerMemesFeatureKey, reducer: playerMemesReducer } =
+  playerMemesFeature;
