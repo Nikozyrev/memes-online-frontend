@@ -4,7 +4,7 @@ import { IMeme } from '../../models/meme.model';
 @Injectable({
   providedIn: 'root',
 })
-export class MemesService {
+export class PlayerMemesService {
   private mockMemes: IMeme[] = [
     {
       image:

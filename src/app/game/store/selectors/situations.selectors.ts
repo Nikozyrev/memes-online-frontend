@@ -1,5 +1,10 @@
 import { createSelector } from '@ngrx/store';
-import { selectSituationsState } from '../reducers/situations.reducers';
+import { selectGameState } from './game.selectors';
+
+export const selectSituationsState = createSelector(
+  selectGameState,
+  (state) => state.situations
+);
 
 export const selectSituationsToSelect = createSelector(
   selectSituationsState,

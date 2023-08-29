@@ -28,8 +28,5 @@ const situationsFeature = createFeature({
   ),
 });
 
-export const {
-  name: situationsFeatureKey,
-  reducer: situationsReducer,
-  selectSituationsState,
-} = situationsFeature;
+export const { name: situationsFeatureKey, reducer: situationsReducer } =
+  situationsFeature;

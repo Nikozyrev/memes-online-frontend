@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { mergeMap, of } from 'rxjs';
+import { of, switchMap } from 'rxjs';
 import { situationsActions } from '../actions/situations.actions';
 import { SituationsService } from '../../services/situations/situations.service';
 
@@ -9,7 +9,7 @@ export class SituationsEffects {
   getSituationsToSelect$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(situationsActions.getSituationsToSelect),
-      mergeMap(() =>
+      switchMap(() =>
         of(
           situationsActions.getSituationsToSelectSuccess({
             situationsToSelect: this.situationsService.getSituations(),
