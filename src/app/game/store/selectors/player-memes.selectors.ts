@@ -1,12 +1,12 @@
 import { createSelector } from '@ngrx/store';
-import { selectMemesState } from '../reducers/memes.reducers';
+import { selectPlayerMemesState } from '../reducers/player-memes.reducers';
 
 export const selectMemesHand = createSelector(
-  selectMemesState,
+  selectPlayerMemesState,
   (state) => state.memesHand
 );
 
 export const selectSelectedMeme = createSelector(
-  selectMemesState,
+  selectPlayerMemesState,
   (state) => state.selectedMeme
 );

@@ -1,8 +1,8 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { IMeme } from '../../models/meme.model';
 
-export const memesActions = createActionGroup({
-  source: 'Memes',
+export const playerMemesActions = createActionGroup({
+  source: 'Player Memes',
   events: {
     'Get Memes': emptyProps(),
     'Get Memes Success': props<{ memes: IMeme[] }>(),

@@ -9,8 +9,11 @@ import { MemeComponent } from './components/meme/meme.component';
 import { HandComponent } from './components/hand/hand.component';
 import { GameInfoComponent } from './components/game-info/game-info.component';
 import { SituationComponent } from './components/situation/situation.component';
-import { memesFeatureKey, memesReducer } from './store/reducers/memes.reducers';
-import { MemesEffects } from './store/effects/memes.effects';
+import {
+  playerMemesFeatureKey,
+  playerMemesReducer,
+} from './store/reducers/player-memes.reducers';
+import { MemesEffects } from './store/effects/player-memes.effects';
 import { SelectSituationComponent } from './components/select-situation/select-situation.component';
 import {
   situationsFeatureKey,
@@ -36,7 +39,7 @@ import { SelectWinnerComponent } from './components/select-winner/select-winner.
   imports: [
     CommonModule,
     GameRoutingModule,
-    StoreModule.forFeature(memesFeatureKey, memesReducer),
+    StoreModule.forFeature(playerMemesFeatureKey, playerMemesReducer),
     StoreModule.forFeature(situationsFeatureKey, situationsReducer),
     EffectsModule.forFeature([MemesEffects, SituationsEffects]),
   ],

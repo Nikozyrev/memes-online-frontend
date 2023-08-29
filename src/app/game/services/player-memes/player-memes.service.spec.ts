@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MemesService } from './memes.service';
+import { PlayerMemesService } from './player-memes.service';
 
-describe('MemesService', () => {
-  let service: MemesService;
+describe('PlayerMemesService', () => {
+  let service: PlayerMemesService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(MemesService);
+    service = TestBed.inject(PlayerMemesService);
   });
 
   it('should be created', () => {
