@@ -5,7 +5,7 @@ import { playerMemesActions } from '../actions/player-memes.actions';
 import { PlayerMemesService } from '../../services/player-memes/player-memes.service';
 
 @Injectable()
-export class MemesEffects {
+export class PlayerMemesEffects {
   getMemes$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(playerMemesActions.getMemes),

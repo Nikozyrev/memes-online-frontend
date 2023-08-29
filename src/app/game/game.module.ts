@@ -13,7 +13,7 @@ import {
   playerMemesFeatureKey,
   playerMemesReducer,
 } from './store/reducers/player-memes.reducers';
-import { MemesEffects } from './store/effects/player-memes.effects';
+import { PlayerMemesEffects } from './store/effects/player-memes.effects';
 import { SelectSituationComponent } from './components/select-situation/select-situation.component';
 import {
   situationsFeatureKey,
@@ -41,7 +41,7 @@ import { SelectWinnerComponent } from './components/select-winner/select-winner.
     GameRoutingModule,
     StoreModule.forFeature(playerMemesFeatureKey, playerMemesReducer),
     StoreModule.forFeature(situationsFeatureKey, situationsReducer),
-    EffectsModule.forFeature([MemesEffects, SituationsEffects]),
+    EffectsModule.forFeature([PlayerMemesEffects, SituationsEffects]),
   ],
 })
 export class GameModule {}
