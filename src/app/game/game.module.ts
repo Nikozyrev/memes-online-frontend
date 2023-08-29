@@ -19,6 +19,7 @@ import {
 import { SituationsEffects } from './store/effects/situations.effects';
 import { SelectedSituationComponent } from './components/selected-situation/selected-situation.component';
 import { SelectedMemeComponent } from './components/selected-meme/selected-meme.component';
+import { SelectWinnerComponent } from './components/select-winner/select-winner.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { SelectedMemeComponent } from './components/selected-meme/selected-meme.
     SelectedSituationComponent,
     MemeComponent,
     SelectedMemeComponent,
+    SelectWinnerComponent,
   ],
   imports: [
     CommonModule,

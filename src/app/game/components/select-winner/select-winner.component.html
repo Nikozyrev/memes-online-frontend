@@ -1,0 +1,8 @@
+<div class="select-winner">
+  <app-meme
+    *ngFor="let meme of memes | async"
+    [meme]="meme"
+    class="card"
+    (click)="selectWinner(meme)"
+  />
+</div>
