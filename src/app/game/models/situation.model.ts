@@ -1,4 +1,6 @@
 export interface ISituation {
-  id?: string;
-  text: string;
+  id: number;
+  situation: string;
+  shortDescription: any;
+  description: any;
 }

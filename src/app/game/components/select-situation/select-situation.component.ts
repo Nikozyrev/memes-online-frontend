@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { ISituation } from '../../models/situation.model';
 import { selectSituationsToSelect } from '../../store/selectors/situations.selectors';
 import { situationsActions } from '../../store/actions/situations.actions';
+import { selectSituations } from '../../store/selectors/game-info.selectors';
 
 @Component({
   selector: 'app-select-situation',
@@ -11,9 +12,7 @@ import { situationsActions } from '../../store/actions/situations.actions';
   styleUrls: ['./select-situation.component.scss'],
 })
 export class SelectSituationComponent implements OnInit {
-  situations: Observable<ISituation[]> = this.store.select(
-    selectSituationsToSelect
-  );
+  situations: Observable<ISituation[]> = this.store.select(selectSituations);
 
   constructor(private store: Store) {}
 
@@ -22,6 +21,6 @@ export class SelectSituationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(situationsActions.getSituationsToSelect());
+    // this.store.dispatch(situationsActions.getSituationsToSelect());
   }
 }

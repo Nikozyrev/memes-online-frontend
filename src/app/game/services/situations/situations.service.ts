@@ -1,20 +1,32 @@
 import { Injectable } from '@angular/core';
 import { ISituation } from '../../models/situation.model';
+import { SocketService } from '../socket/socket.service';
+import { IGameInfo } from '../../models/socket.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SituationsService {
-  mockedSituations: ISituation[] = [
-    { id: '1', text: 'Situation 1' },
-    { id: '2', text: 'Situation 2' },
-    { id: '3', text: 'Situation 3' },
-    { id: '4', text: 'Situation 4' },
-  ];
+  mockedSituations: ISituation[] = [];
 
-  constructor() {}
+  constructor(private socketService: SocketService) {}
 
   getSituations() {
     return this.mockedSituations;
+  }
+
+  selectSituation(id: number, gameInfo: IGameInfo) {
+    if (gameInfo.stage !== '1') {
+      return;
+    }
+    const selectSituationObj = {
+      action: 'game_action',
+      gameAction: {
+        sessionId: gameInfo.sessionId,
+        action: 'select_situation',
+        id: id,
+      },
+    };
+    this.socketService.sendMessage(selectSituationObj);
   }
 }

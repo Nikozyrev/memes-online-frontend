@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectIsSituationSelected } from '../../store/selectors/situations.selectors';
+import { selectIsSituationSelected } from '../../store/selectors/game-info.selectors';
 import { socketActions } from '../../store/actions/socket.actions';
 
 @Component({
