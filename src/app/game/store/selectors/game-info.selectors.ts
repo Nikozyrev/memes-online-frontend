@@ -11,6 +11,16 @@ export const selectGameInfo = createSelector(
   (state) => state.gameInfo
 );
 
+export const selectStage = createSelector(
+  selectGameInfo,
+  (state) => state?.stage
+);
+
+export const selectTimer = createSelector(
+  selectGameInfo,
+  (state) => state?.second
+);
+
 export const selectSituations = createSelector(
   selectGameInfo,
   (state) => state?.situations ?? []
