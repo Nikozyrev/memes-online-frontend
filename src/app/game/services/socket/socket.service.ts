@@ -19,16 +19,6 @@ export class SocketService {
 
   constructor() {
     this.stompClient = new RxStomp();
-
-    this.stompClient.connected$.subscribe((state) => {
-      if (state === 1) {
-        this.extractSimpSessionId();
-        this.attachUser('admin');
-        setTimeout(() => {
-          this.createSession();
-        }, 200);
-      }
-    });
   }
 
   connectSocket() {
@@ -70,10 +60,8 @@ export class SocketService {
 
         autoStep: false,
 
-        //upd val
         maxPlayers: 100,
 
-        //new
         situationDeckSize: 8,
         situationsToChooseCount: 2,
         memeDeckSize: 12,
@@ -112,7 +100,7 @@ export class SocketService {
     });
   }
 
-  private extractSimpSessionId() {
+  extractSimpSessionId() {
     const sock = this.socket as any;
     const extractedSimpSessionId = /\/([^\/]+)\/websocket/.exec(
       sock._transport.url

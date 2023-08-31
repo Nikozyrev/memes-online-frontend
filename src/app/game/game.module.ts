@@ -19,6 +19,7 @@ import { PlayerMemesEffects } from './store/effects/player-memes.effects';
 import { SituationsEffects } from './store/effects/situations.effects';
 import { SocketEffects } from './store/effects/socket.effects';
 import { GameInfoEffects } from './store/effects/game-info.effects';
+import { EnterGameComponent } from './components/enter-game/enter-game.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { GameInfoEffects } from './store/effects/game-info.effects';
     MemeComponent,
     SelectedMemeComponent,
     SelectWinnerComponent,
+    EnterGameComponent,
   ],
   imports: [
     CommonModule,

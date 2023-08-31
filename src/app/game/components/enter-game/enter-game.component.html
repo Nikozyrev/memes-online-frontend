@@ -1,0 +1,32 @@
+<div class="enter-game">
+  <p>
+    Socket connected:
+    {{ (isConnected | async) ? "Yes" : "No" }}
+  </p>
+  <p>Login:</p>
+  <input
+    #loginInput
+    type="text"
+    [value]="login"
+    (change)="login = loginInput.value"
+  />
+
+  <p>Session id to join:</p>
+  <input
+    #sessionIdInput
+    type="text"
+    [value]="sessionId"
+    (change)="setSessionId(sessionIdInput.value)"
+  />
+
+  <p *ngIf="sessionIdJoined | async as sessionIdJoined">
+    Joined to session id: {{ sessionIdJoined }}
+  </p>
+
+  <div class="btns">
+    <button (click)="attachUser(loginInput.value)">Attach User</button>
+    <button (click)="createSession()">Create session</button>
+    <button (click)="unpauseSession()">Unpause session</button>
+    <button (click)="joinSession(sessionId)">Join session</button>
+  </div>
+</div>

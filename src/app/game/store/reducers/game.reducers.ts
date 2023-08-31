@@ -1,5 +1,10 @@
 import { combineReducers } from '@ngrx/store';
 import {
+  gameStatusFeatureKey,
+  gameStatusReducer,
+} from './game-status.reducers';
+import { gameInfoFeatureKey, gameInfoReducer } from './game-info.reducers';
+import {
   playerMemesFeatureKey,
   playerMemesReducer,
 } from './player-memes.reducers';
@@ -8,11 +13,11 @@ import {
   roundResultsFeatureKey,
   roundResultsReducer,
 } from './round-results.reducers';
-import { gameInfoFeatureKey, gameInfoReducer } from './game-info.reducers';
 
 export const gameReducer = combineReducers({
+  [gameStatusFeatureKey]: gameStatusReducer,
   [gameInfoFeatureKey]: gameInfoReducer,
-  [playerMemesFeatureKey]: playerMemesReducer,
-  [situationsFeatureKey]: situationsReducer,
-  [roundResultsFeatureKey]: roundResultsReducer,
+  // [playerMemesFeatureKey]: playerMemesReducer,
+  // [situationsFeatureKey]: situationsReducer,
+  // [roundResultsFeatureKey]: roundResultsReducer,
 });

@@ -5,5 +5,9 @@ export const socketActions = createActionGroup({
   events: {
     Connect: emptyProps(),
     Connected: emptyProps(),
+    Disconnected: emptyProps(),
+    'Attach User': props<{ login: string }>(),
+    'Create Session': emptyProps(),
+    'Join Session': props<{ sessionId: number }>(),
   },
 });

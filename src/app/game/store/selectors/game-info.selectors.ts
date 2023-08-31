@@ -11,6 +11,11 @@ export const selectGameInfo = createSelector(
   (state) => state.gameInfo
 );
 
+export const selectSessionId = createSelector(
+  selectGameInfo,
+  (state) => state?.sessionId
+);
+
 export const selectStage = createSelector(
   selectGameInfo,
   (state) => state?.stage
