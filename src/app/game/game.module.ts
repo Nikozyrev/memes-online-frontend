@@ -18,6 +18,7 @@ import { gameReducer } from './store/reducers/game.reducers';
 import { PlayerMemesEffects } from './store/effects/player-memes.effects';
 import { SituationsEffects } from './store/effects/situations.effects';
 import { SocketEffects } from './store/effects/socket.effects';
+import { GameInfoEffects } from './store/effects/game-info.effects';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { SocketEffects } from './store/effects/socket.effects';
     StoreModule.forFeature(gameFeatureKey, gameReducer),
     EffectsModule.forFeature([
       SocketEffects,
+      GameInfoEffects,
       PlayerMemesEffects,
       SituationsEffects,
     ]),
