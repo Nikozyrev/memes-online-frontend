@@ -26,8 +26,7 @@ export class SocketService {
         this.attachUser('admin');
         setTimeout(() => {
           this.createSession();
-          this.getGameState().subscribe((msg) => console.log(msg));
-        }, 1000);
+        }, 200);
       }
     });
   }
@@ -36,6 +35,7 @@ export class SocketService {
     this.socket = new SockJS('http://localhost:8080/wsl');
     this.stompClient.configure(this.rxStompConfig);
     this.stompClient.activate();
+    return this.stompClient.connected$;
   }
 
   getGameState() {
@@ -97,7 +97,7 @@ export class SocketService {
     }
   }
 
-  private sendMessage(object: any) {
+  sendMessage(object: any) {
     this.stompClient.publish({
       destination: '/app/resume',
       body: JSON.stringify(object),

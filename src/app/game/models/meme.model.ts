@@ -1,4 +1,4 @@
 export interface IMeme {
-  id?: string;
-  image: string;
+  id: number;
+  url: string;
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectIsSituationSelected } from '../../store/selectors/situations.selectors';
-import { SocketService } from '../../services/socket/socket.service';
+import { socketActions } from '../../store/actions/socket.actions';
 
 @Component({
   selector: 'app-game',
@@ -11,9 +11,9 @@ import { SocketService } from '../../services/socket/socket.service';
 export class GameComponent implements OnInit {
   isSituationSelected = this.store.select(selectIsSituationSelected);
 
-  constructor(private store: Store, private socketService: SocketService) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.socketService.connectSocket();
+    this.store.dispatch(socketActions.connect());
   }
 }
