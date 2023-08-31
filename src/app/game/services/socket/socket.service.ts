@@ -68,14 +68,22 @@ export class SocketService {
         paused: false,
         finished: false,
 
-        autoStep: true,
+        autoStep: false,
 
-        maxPlayers: 5,
+        //upd val
+        maxPlayers: 100,
 
-        stageOneTime: 5,
-        stageTwoTime: 8,
-        stageThreeTime: 3,
-        stageFourTime: 12,
+        //new
+        situationDeckSize: 8,
+        situationsToChooseCount: 2,
+        memeDeckSize: 12,
+        memesPerHand: 4,
+        sendMessageTime: 250,
+
+        stageOneTime: 15,
+        stageTwoTime: 15,
+        stageThreeTime: 15,
+        stageFourTime: 15,
       },
     });
   }

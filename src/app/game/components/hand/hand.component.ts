@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { IMeme } from '../../models/meme.model';
 import { playerMemesActions } from '../../store/actions/player-memes.actions';
 import * as MemesSelectors from '../../store/selectors/player-memes.selectors';
+import * as GameInfoSelectors from '../../store/selectors/game-info.selectors';
 
 @Component({
   selector: 'app-hand',
@@ -11,14 +12,12 @@ import * as MemesSelectors from '../../store/selectors/player-memes.selectors';
   styleUrls: ['./hand.component.scss'],
 })
 export class HandComponent implements OnInit {
-  memes: Observable<IMeme[]> = this.store.select(
-    MemesSelectors.selectMemesHand
-  );
+  memes: Observable<IMeme[]> = this.store.select(GameInfoSelectors.selectHand);
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.store.dispatch(playerMemesActions.getMemes());
+    // this.store.dispatch(playerMemesActions.getMemes());
   }
 
   selectMeme(meme: IMeme) {

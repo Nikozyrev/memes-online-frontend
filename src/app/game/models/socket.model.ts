@@ -20,7 +20,7 @@ export interface IGameInfo {
   users: User[];
   situations: Situation[];
   selectedSituation: SelectedSituation;
-  selectedMeme: Meme;
+  selectedMeme: Meme | null;
   selectedMemes: SelectedMeme[];
 }
 
