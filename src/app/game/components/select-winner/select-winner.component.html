@@ -9,4 +9,8 @@
     }"
     (click)="selectWinner(roundMeme.meme)"
   />
+
+  <div class="no-memes" *ngIf="!state.roundMemes.length">
+    В этом раунде не выбрано ни одного мема.
+  </div>
 </div>

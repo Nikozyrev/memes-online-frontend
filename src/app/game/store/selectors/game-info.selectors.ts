@@ -38,10 +38,7 @@ export const selectSelectedSituation = createSelector(
 
 export const selectIsSituationSelected = createSelector(
   selectGameInfo,
-  (state) => {
-    if (state?.stage !== '1') return true;
-    return !!state?.selectedSituation;
-  }
+  (state) => !!state?.selectedSituation
 );
 
 export const selectHand = createSelector(

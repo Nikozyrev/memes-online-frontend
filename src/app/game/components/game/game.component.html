@@ -1,14 +1,20 @@
-<div class="game-page">
+<div class="game-page" *ngIf="state | async as state">
   <app-enter-game></app-enter-game>
   <app-game-info class="border"></app-game-info>
   <div class="center">
     <app-selected-meme class="border"></app-selected-meme>
     <app-selected-situation class="border"></app-selected-situation>
   </div>
-  <app-select-winner></app-select-winner>
+  <ng-container
+    *ngIf="state.currentStage === '3' || state.currentStage === '4'"
+  >
+    <app-select-winner></app-select-winner>
+  </ng-container>
   <app-hand class="border"></app-hand>
 
-  <app-select-situation
-    *ngIf="(isSituationSelected | async) === false"
-  ></app-select-situation>
+  <ng-container *ngIf="state.currentStage === '1'">
+    <app-select-situation
+      *ngIf="!state.isSituationSelected"
+    ></app-select-situation>
+  </ng-container>
 </div>

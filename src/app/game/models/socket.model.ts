@@ -13,7 +13,7 @@ export interface IGameInfo {
   hostUserName: string;
   stageInfo: string;
   round: string;
-  stage: string;
+  stage: Stage;
   second: string;
   hand: Meme[];
   winHand: Meme[];
@@ -23,6 +23,13 @@ export interface IGameInfo {
   selectedMeme: Meme | null;
   selectedMemes: SelectedMeme[];
   winnerMeme?: Meme | null;
+}
+
+export enum Stage {
+  one = '1',
+  two = '2',
+  three = '3',
+  four = '4',
 }
 
 export interface Meme {
