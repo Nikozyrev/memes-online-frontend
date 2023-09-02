@@ -53,3 +53,13 @@ export const selectSelectedMeme = createSelector(
   selectGameInfo,
   (state) => state?.selectedMeme ?? null
 );
+
+export const selectRoundMemes = createSelector(
+  selectGameInfo,
+  (state) => state?.selectedMemes ?? []
+);
+
+export const selectRoundWinner = createSelector(
+  selectGameInfo,
+  (state) => state?.winnerMeme ?? null
+);

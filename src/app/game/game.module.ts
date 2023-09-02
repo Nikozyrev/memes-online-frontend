@@ -20,6 +20,7 @@ import { SituationsEffects } from './store/effects/situations.effects';
 import { SocketEffects } from './store/effects/socket.effects';
 import { GameInfoEffects } from './store/effects/game-info.effects';
 import { EnterGameComponent } from './components/enter-game/enter-game.component';
+import { RoundResultsEffects } from './store/effects/round-results.effects';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { EnterGameComponent } from './components/enter-game/enter-game.component
       GameInfoEffects,
       PlayerMemesEffects,
       SituationsEffects,
+      RoundResultsEffects,
     ]),
   ],
 })

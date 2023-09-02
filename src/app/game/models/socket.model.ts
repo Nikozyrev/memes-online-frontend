@@ -19,9 +19,10 @@ export interface IGameInfo {
   winHand: Meme[];
   users: User[];
   situations: Situation[];
-  selectedSituation: SelectedSituation;
+  selectedSituation: Situation | null;
   selectedMeme: Meme | null;
   selectedMemes: SelectedMeme[];
+  winnerMeme?: Meme | null;
 }
 
 export interface Meme {
@@ -35,13 +36,6 @@ export interface User {
 }
 
 export interface Situation {
-  id: number;
-  situation: string;
-  shortDescription: any;
-  description: any;
-}
-
-export interface SelectedSituation {
   id: number;
   situation: string;
   shortDescription: any;
