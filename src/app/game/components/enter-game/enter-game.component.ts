@@ -29,7 +29,9 @@ export class EnterGameComponent {
     this.store.dispatch(socketActions.createSession());
   }
 
-  unpauseSession() {}
+  unpauseSession() {
+    this.store.dispatch(socketActions.unpauseSession());
+  }
 
   joinSession(sessionId: number) {
     this.store.dispatch(socketActions.joinSession({ sessionId }));

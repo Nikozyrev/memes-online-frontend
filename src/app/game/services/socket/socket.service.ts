@@ -55,7 +55,7 @@ export class SocketService {
       action: 'create_session',
       sessionSettings: {
         active: true,
-        paused: false,
+        paused: true,
         finished: false,
 
         autoStep: false,
