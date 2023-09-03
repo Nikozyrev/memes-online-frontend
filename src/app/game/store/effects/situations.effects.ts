@@ -29,9 +29,9 @@ export class SituationsEffects {
       ofType(socketActions.connected),
       switchMap(() => {
         return this.situationsService.getSelectedSituation().pipe(
-          map((situation) =>
+          map((selectedSituation) =>
             situationsActions.getSelectedSituationSuccess({
-              situation,
+              selectedSituation,
             })
           )
         );

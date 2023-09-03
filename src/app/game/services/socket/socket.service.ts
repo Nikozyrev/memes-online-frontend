@@ -70,8 +70,8 @@ export class SocketService {
 
         stageOneTime: 15,
         stageTwoTime: 15,
-        stageThreeTime: 30,
-        stageFourTime: 30,
+        stageThreeTime: 15,
+        stageFourTime: 15,
       },
     });
   }

@@ -19,10 +19,10 @@ const situationsFeature = createFeature({
       })
     ),
     on(
-      situationsActions.selectSituation,
-      (state, { situation }): ISituationsState => ({
+      situationsActions.getSelectedSituationSuccess,
+      (state, { selectedSituation }): ISituationsState => ({
         ...state,
-        selectedSituation: situation,
+        selectedSituation,
       })
     )
   ),

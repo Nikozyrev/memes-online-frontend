@@ -11,7 +11,7 @@ export const situationsActions = createActionGroup({
     'Get Situations Error': props<{ error: string }>(),
     'Get Selected Situation': emptyProps(),
     'Get Selected Situation Success': props<{
-      situation: ISituation | null;
+      selectedSituation: ISituation | null;
     }>(),
     'Get Selected Situation Error': props<{ error: string }>(),
     'Select Situation': props<{ situation: ISituation }>(),
