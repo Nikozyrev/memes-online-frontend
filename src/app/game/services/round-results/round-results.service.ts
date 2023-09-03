@@ -12,9 +12,10 @@ export class RoundResultsService {
   getRoundMemes() {
     return this.socketService.getGameState().pipe(
       map(({ selectedMemes }) => selectedMemes ?? []),
-      distinctUntilChanged((prev, current) =>
-        current.every(({ meme: { id } }, i) => id === prev[i]?.meme.id)
-      )
+      distinctUntilChanged((prev, current) => {
+        if (current.length !== prev.length) return false;
+        return current.every(({ meme: { id } }, i) => id === prev[i]?.meme.id);
+      })
     );
   }
 

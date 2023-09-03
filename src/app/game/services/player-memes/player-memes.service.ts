@@ -12,9 +12,10 @@ export class PlayerMemesService {
   getMemes() {
     return this.socketService.getGameState().pipe(
       map(({ hand }) => hand ?? []),
-      distinctUntilChanged((prev, current) =>
-        current.every(({ id }, i) => id === prev[i]?.id)
-      )
+      distinctUntilChanged((prev, current) => {
+        if (current.length !== prev.length) return false;
+        return current.every(({ id }, i) => id === prev[i]?.id);
+      })
     );
   }
 

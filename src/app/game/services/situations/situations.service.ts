@@ -12,9 +12,10 @@ export class SituationsService {
   getSituations() {
     return this.socketService.getGameState().pipe(
       map(({ situations }) => situations ?? []),
-      distinctUntilChanged((prev, current) =>
-        current.every(({ id }, i) => id === prev[i]?.id)
-      )
+      distinctUntilChanged((prev, current) => {
+        if (current.length !== prev.length) return false;
+        return current.every(({ id }, i) => id === prev[i]?.id);
+      })
     );
   }
 
