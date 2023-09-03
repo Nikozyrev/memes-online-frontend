@@ -10,4 +10,9 @@
 .card {
   max-width: fit-content;
   flex: 0 1 15%;
+  cursor: not-allowed;
+
+  &.active {
+    cursor: pointer;
+  }
 }

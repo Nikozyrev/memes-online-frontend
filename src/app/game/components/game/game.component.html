@@ -10,7 +10,7 @@
   >
     <app-select-winner></app-select-winner>
   </ng-container>
-  <app-hand class="border"></app-hand>
+  <app-hand class="border" [isActive]="state.currentStage === '2'"></app-hand>
 
   <ng-container *ngIf="state.currentStage === '1'">
     <app-select-situation
