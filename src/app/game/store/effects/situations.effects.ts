@@ -1,25 +1,43 @@
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
-import { of, switchMap, tap } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs';
+import { Store } from '@ngrx/store';
 import { situationsActions } from '../actions/situations.actions';
 import { SituationsService } from '../../services/situations/situations.service';
 import { selectGameInfo } from '../selectors/game-info.selectors';
-import { Store } from '@ngrx/store';
+import { socketActions } from '../actions/socket.actions';
 
 @Injectable()
 export class SituationsEffects {
-  // getSituationsToSelect$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(situationsActions.getSituationsToSelect),
-  //     switchMap(() =>
-  //       of(
-  //         situationsActions.getSituationsToSelectSuccess({
-  //           situationsToSelect: this.situationsService.getSituations(),
-  //         })
-  //       )
-  //     )
-  //   );
-  // });
+  getSituations$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(socketActions.connected),
+      switchMap(() => {
+        return this.situationsService.getSituations().pipe(
+          map((situations) =>
+            situationsActions.getSituationsSuccess({
+              situations,
+            })
+          )
+        );
+      })
+    );
+  });
+
+  getSelectedSituation$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(socketActions.connected),
+      switchMap(() => {
+        return this.situationsService.getSelectedSituation().pipe(
+          map((situation) =>
+            situationsActions.getSelectedSituationSuccess({
+              situation,
+            })
+          )
+        );
+      })
+    );
+  });
 
   selectSituation$ = createEffect(
     () => {

@@ -4,11 +4,16 @@ import { ISituation } from '../../models/situation.model';
 export const situationsActions = createActionGroup({
   source: 'Situations',
   events: {
-    'Get Situations To Select': emptyProps(),
-    'Get Situations To Select Success': props<{
-      situationsToSelect: ISituation[];
+    'Get Situations': emptyProps(),
+    'Get Situations Success': props<{
+      situations: ISituation[];
     }>(),
-    'Get Situations To Select Error': props<{ error: string }>(),
+    'Get Situations Error': props<{ error: string }>(),
+    'Get Selected Situation': emptyProps(),
+    'Get Selected Situation Success': props<{
+      situation: ISituation | null;
+    }>(),
+    'Get Selected Situation Error': props<{ error: string }>(),
     'Select Situation': props<{ situation: ISituation }>(),
   },
 });

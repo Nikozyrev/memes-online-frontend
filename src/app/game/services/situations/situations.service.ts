@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ISituation } from '../../models/situation.model';
+import { distinctUntilChanged, map } from 'rxjs';
 import { SocketService } from '../socket/socket.service';
 import { IGameInfo } from '../../models/socket.model';
 
@@ -7,12 +7,22 @@ import { IGameInfo } from '../../models/socket.model';
   providedIn: 'root',
 })
 export class SituationsService {
-  mockedSituations: ISituation[] = [];
-
   constructor(private socketService: SocketService) {}
 
   getSituations() {
-    return this.mockedSituations;
+    return this.socketService.getGameState().pipe(
+      map(({ situations }) => situations ?? []),
+      distinctUntilChanged((prev, current) =>
+        current.every(({ id }, i) => id === prev[i]?.id)
+      )
+    );
+  }
+
+  getSelectedSituation() {
+    return this.socketService.getGameState().pipe(
+      map(({ selectedSituation }) => selectedSituation),
+      distinctUntilChanged((prev, current) => current?.id === prev?.id)
+    );
   }
 
   selectSituation(id: number, gameInfo: IGameInfo) {

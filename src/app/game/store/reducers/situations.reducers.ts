@@ -3,7 +3,7 @@ import { situationsActions } from '../actions/situations.actions';
 import { ISituationsState } from '../models/situations-state.model';
 
 const initialState: ISituationsState = {
-  situationsToSelect: [],
+  situations: [],
   selectedSituation: null,
 };
 
@@ -12,10 +12,10 @@ const situationsFeature = createFeature({
   reducer: createReducer(
     initialState,
     on(
-      situationsActions.getSituationsToSelectSuccess,
-      (state, { situationsToSelect }): ISituationsState => ({
+      situationsActions.getSituationsSuccess,
+      (state, { situations }): ISituationsState => ({
         ...state,
-        situationsToSelect,
+        situations,
       })
     ),
     on(

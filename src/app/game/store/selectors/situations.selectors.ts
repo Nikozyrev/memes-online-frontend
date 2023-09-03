@@ -6,9 +6,9 @@ export const selectSituationsState = createSelector(
   (state) => state.situations
 );
 
-export const selectSituationsToSelect = createSelector(
+export const selectSituations = createSelector(
   selectSituationsState,
-  (state) => state.situationsToSelect
+  (state) => state.situations
 );
 
 export const selectSelectedSituation = createSelector(
