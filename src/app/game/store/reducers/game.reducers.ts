@@ -1,5 +1,10 @@
 import { combineReducers } from '@ngrx/store';
 import {
+  gameStatusFeatureKey,
+  gameStatusReducer,
+} from './game-status.reducers';
+import { gameInfoFeatureKey, gameInfoReducer } from './game-info.reducers';
+import {
   playerMemesFeatureKey,
   playerMemesReducer,
 } from './player-memes.reducers';
@@ -10,6 +15,8 @@ import {
 } from './round-results.reducers';
 
 export const gameReducer = combineReducers({
+  [gameStatusFeatureKey]: gameStatusReducer,
+  [gameInfoFeatureKey]: gameInfoReducer,
   [playerMemesFeatureKey]: playerMemesReducer,
   [situationsFeatureKey]: situationsReducer,
   [roundResultsFeatureKey]: roundResultsReducer,

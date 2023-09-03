@@ -1,11 +1,17 @@
 <div class="select-winner" *ngIf="roundState | async as state">
   <app-meme
-    *ngFor="let meme of state.memes"
-    [meme]="meme"
+    *ngFor="let roundMeme of state.roundMemes"
+    [meme]="roundMeme.meme"
     class="card"
     [ngClass]="{
-      winner: state.roundWinner?.id && meme.id === state.roundWinner?.id
+      winner:
+        state.roundWinner?.meme?.id &&
+        roundMeme.meme.id === state.roundWinner?.meme?.id
     }"
-    (click)="selectWinner(meme)"
+    (click)="selectWinner(roundMeme.meme)"
   />
+
+  <div class="no-memes" *ngIf="!state.roundMemes.length">
+    В этом раунде не выбрано ни одного мема.
+  </div>
 </div>

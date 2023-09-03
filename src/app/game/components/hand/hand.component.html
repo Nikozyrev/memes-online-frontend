@@ -3,6 +3,9 @@
     *ngFor="let meme of memes | async"
     [meme]="meme"
     class="card"
+    [ngClass]="{
+      active: isActive
+    }"
     (click)="selectMeme(meme)"
   />
 </div>

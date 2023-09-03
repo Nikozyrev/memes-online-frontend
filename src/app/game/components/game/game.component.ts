@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { combineLatest } from 'rxjs';
+import { selectStage } from '../../store/selectors/game-info.selectors';
+import { socketActions } from '../../store/actions/socket.actions';
 import { selectIsSituationSelected } from '../../store/selectors/situations.selectors';
 
 @Component({
@@ -7,8 +10,15 @@ import { selectIsSituationSelected } from '../../store/selectors/situations.sele
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
 })
-export class GameComponent {
-  isSituationSelected = this.store.select(selectIsSituationSelected);
+export class GameComponent implements OnInit {
+  state = combineLatest({
+    currentStage: this.store.select(selectStage),
+    isSituationSelected: this.store.select(selectIsSituationSelected),
+  });
 
   constructor(private store: Store) {}
+
+  ngOnInit(): void {
+    this.store.dispatch(socketActions.connect());
+  }
 }

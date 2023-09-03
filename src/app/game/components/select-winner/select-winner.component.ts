@@ -15,7 +15,7 @@ import { roundResultsActions } from '../../store/actions/round-results.actions';
 })
 export class SelectWinnerComponent {
   roundState = combineLatest({
-    memes: this.store.select(selectRoundMemes),
+    roundMemes: this.store.select(selectRoundMemes),
     roundWinner: this.store.select(selectRoundWinner),
   });
 

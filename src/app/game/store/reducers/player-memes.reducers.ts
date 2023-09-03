@@ -16,7 +16,7 @@ const playerMemesFeature = createFeature({
       (state, { memes }): IPlayerMemesState => ({ ...state, memesHand: memes })
     ),
     on(
-      playerMemesActions.selectMeme,
+      playerMemesActions.getSelectedMemeSuccess,
       (state, { meme }): IPlayerMemesState => ({ ...state, selectedMeme: meme })
     )
   ),

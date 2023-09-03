@@ -10,6 +10,7 @@
 .card {
   max-width: fit-content;
   flex: 0 1 10%;
+  cursor: pointer;
 
   &.winner {
     border: 2px solid orange;

@@ -17,6 +17,10 @@ import { gameFeatureKey } from './store/selectors/game.selectors';
 import { gameReducer } from './store/reducers/game.reducers';
 import { PlayerMemesEffects } from './store/effects/player-memes.effects';
 import { SituationsEffects } from './store/effects/situations.effects';
+import { SocketEffects } from './store/effects/socket.effects';
+import { GameInfoEffects } from './store/effects/game-info.effects';
+import { EnterGameComponent } from './components/enter-game/enter-game.component';
+import { RoundResultsEffects } from './store/effects/round-results.effects';
 
 @NgModule({
   declarations: [
@@ -29,12 +33,19 @@ import { SituationsEffects } from './store/effects/situations.effects';
     MemeComponent,
     SelectedMemeComponent,
     SelectWinnerComponent,
+    EnterGameComponent,
   ],
   imports: [
     CommonModule,
     GameRoutingModule,
     StoreModule.forFeature(gameFeatureKey, gameReducer),
-    EffectsModule.forFeature([PlayerMemesEffects, SituationsEffects]),
+    EffectsModule.forFeature([
+      SocketEffects,
+      GameInfoEffects,
+      PlayerMemesEffects,
+      SituationsEffects,
+      RoundResultsEffects,
+    ]),
   ],
 })
 export class GameModule {}
