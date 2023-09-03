@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { distinctUntilChanged, map } from 'rxjs';
 import { SocketService } from '../socket/socket.service';
 import { IGameInfo } from '../../models/socket.model';
 
@@ -7,6 +8,24 @@ import { IGameInfo } from '../../models/socket.model';
 })
 export class RoundResultsService {
   constructor(private socketService: SocketService) {}
+
+  getRoundMemes() {
+    return this.socketService.getGameState().pipe(
+      map(({ selectedMemes }) => selectedMemes ?? []),
+      distinctUntilChanged((prev, current) =>
+        current.every(({ meme: { id } }, i) => id === prev[i]?.meme.id)
+      )
+    );
+  }
+
+  getRoundWinner() {
+    return this.socketService.getGameState().pipe(
+      map(({ currentRoundWinner }) => currentRoundWinner),
+      distinctUntilChanged(
+        (prev, current) => current?.meme.id === prev?.meme.id
+      )
+    );
+  }
 
   selectWinMeme(memeId: number, gameInfo: IGameInfo) {
     if (gameInfo.stage !== '3') {

@@ -19,10 +19,10 @@ const roundResultsFeature = createFeature({
       })
     ),
     on(
-      roundResultsActions.selectWinner,
-      (state, { meme }): IRoundResultsState => ({
+      roundResultsActions.getRoundWinnerSuccess,
+      (state, { roundWinner }): IRoundResultsState => ({
         ...state,
-        roundWinner: meme,
+        roundWinner,
       })
     )
   ),

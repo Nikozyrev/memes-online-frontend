@@ -25,38 +25,3 @@ export const selectTimer = createSelector(
   selectGameInfo,
   (state) => state?.second
 );
-
-export const selectSituations = createSelector(
-  selectGameInfo,
-  (state) => state?.situations ?? []
-);
-
-export const selectSelectedSituation = createSelector(
-  selectGameInfo,
-  (state) => state?.selectedSituation ?? null
-);
-
-export const selectIsSituationSelected = createSelector(
-  selectGameInfo,
-  (state) => !!state?.selectedSituation
-);
-
-export const selectHand = createSelector(
-  selectGameInfo,
-  (state) => state?.hand ?? []
-);
-
-export const selectSelectedMeme = createSelector(
-  selectGameInfo,
-  (state) => state?.selectedMeme ?? null
-);
-
-export const selectRoundMemes = createSelector(
-  selectGameInfo,
-  (state) => state?.selectedMemes ?? []
-);
-
-export const selectRoundWinner = createSelector(
-  selectGameInfo,
-  (state) => state?.winnerMeme ?? null
-);

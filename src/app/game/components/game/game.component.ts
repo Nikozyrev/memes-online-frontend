@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import {
-  selectIsSituationSelected,
-  selectStage,
-} from '../../store/selectors/game-info.selectors';
-import { socketActions } from '../../store/actions/socket.actions';
 import { combineLatest } from 'rxjs';
+import { selectStage } from '../../store/selectors/game-info.selectors';
+import { socketActions } from '../../store/actions/socket.actions';
+import { selectIsSituationSelected } from '../../store/selectors/situations.selectors';
 
 @Component({
   selector: 'app-game',

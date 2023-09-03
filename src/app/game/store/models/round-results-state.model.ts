@@ -1,6 +1,6 @@
-import { IMeme } from '../../models/meme.model';
+import { ISelectedMeme } from '../../models/meme.model';
 
 export interface IRoundResultsState {
-  roundMemes: IMeme[];
-  roundWinner: IMeme | null;
+  roundMemes: ISelectedMeme[];
+  roundWinner: ISelectedMeme | null;
 }

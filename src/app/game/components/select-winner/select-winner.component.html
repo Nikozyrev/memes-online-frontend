@@ -5,7 +5,8 @@
     class="card"
     [ngClass]="{
       winner:
-        state.roundWinner?.id && roundMeme.meme.id === state.roundWinner?.id
+        state.roundWinner?.meme?.id &&
+        roundMeme.meme.id === state.roundWinner?.meme?.id
     }"
     (click)="selectWinner(roundMeme.meme)"
   />

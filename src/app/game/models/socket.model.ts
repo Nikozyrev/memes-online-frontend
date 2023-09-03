@@ -1,3 +1,8 @@
+import { Stage } from './game-info.model';
+import { IMeme, ISelectedMeme } from './meme.model';
+import { ISituation } from './situation.model';
+import { IUser } from './user.model';
+
 export interface ISocketMessageBody {
   action: string;
   gameInfo: IGameInfo;
@@ -15,41 +20,12 @@ export interface IGameInfo {
   round: string;
   stage: Stage;
   second: string;
-  hand: Meme[] | null;
-  winHand: Meme[];
-  users: User[];
-  situations: Situation[] | null;
-  selectedSituation: Situation | null;
-  selectedMeme: Meme | null;
-  selectedMemes: SelectedMeme[];
-  winnerMeme?: Meme | null;
-}
-
-export enum Stage {
-  one = '1',
-  two = '2',
-  three = '3',
-  four = '4',
-}
-
-export interface Meme {
-  id: number;
-  url: string;
-}
-
-export interface User {
-  id: number;
-  name: string;
-}
-
-export interface Situation {
-  id: number;
-  situation: string;
-  shortDescription: any;
-  description: any;
-}
-
-export interface SelectedMeme {
-  user: User;
-  meme: Meme;
+  hand: IMeme[] | null;
+  winHand: IMeme[];
+  users: IUser[];
+  situations: ISituation[] | null;
+  selectedSituation: ISituation | null;
+  selectedMeme: IMeme | null;
+  selectedMemes: ISelectedMeme[] | null;
+  currentRoundWinner: ISelectedMeme | null;
 }
