@@ -5,21 +5,21 @@ import { IUser } from './user.model';
 
 export interface ISocketMessageBody {
   action: string;
-  gameInfo: IGameInfo;
+  gameInfo: IGameInfoFromServer;
 }
 
-export interface IGameInfo {
+export interface IGameInfoFromServer {
+  sessionId: number | null;
   activeUserId: number;
   activeUserName: string;
   description: string;
   error: string | null;
-  sessionId: number;
   hostUserId: number;
   hostUserName: string;
-  stageInfo: string;
-  round: string;
-  stage: Stage;
-  second: string;
+  stageInfo: string | null;
+  round: string | null;
+  stage: Stage | null;
+  second: string | null;
   hand: IMeme[] | null;
   winHand: IMeme[];
   users: IUser[];

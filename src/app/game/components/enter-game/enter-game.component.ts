@@ -16,7 +16,7 @@ export class EnterGameComponent {
   sessionId = 0;
 
   isConnected: Observable<boolean> = this.store.select(selectIsConnected);
-  sessionIdJoined: Observable<number | undefined> =
+  sessionIdJoined: Observable<number | null | undefined> =
     this.store.select(selectSessionId);
 
   constructor(private store: Store) {}

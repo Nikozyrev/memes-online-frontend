@@ -6,22 +6,17 @@ export const selectGameInfoState = createSelector(
   (state) => state.gameInfo
 );
 
-export const selectGameInfo = createSelector(
-  selectGameInfoState,
-  (state) => state.gameInfo
-);
-
 export const selectSessionId = createSelector(
-  selectGameInfo,
-  (state) => state?.sessionId
+  selectGameInfoState,
+  (state) => state.sessionId
 );
 
 export const selectStage = createSelector(
-  selectGameInfo,
-  (state) => state?.stage
+  selectGameInfoState,
+  (state) => state.stage
 );
 
 export const selectTimer = createSelector(
-  selectGameInfo,
-  (state) => state?.second
+  selectGameInfoState,
+  (state) => state.second
 );

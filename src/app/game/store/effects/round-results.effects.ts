@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { map, switchMap, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { selectGameInfo } from '../selectors/game-info.selectors';
+import { selectGameInfoState } from '../selectors/game-info.selectors';
 import { RoundResultsService } from '../../services/round-results/round-results.service';
 import { roundResultsActions } from '../actions/round-results.actions';
 import { socketActions } from '../actions/socket.actions';
@@ -43,12 +43,12 @@ export class RoundResultsEffects {
     () => {
       return this.actions$.pipe(
         ofType(roundResultsActions.selectWinner),
-        concatLatestFrom(() => this.store.select(selectGameInfo)),
-        tap(([{ meme }, gameInfo]) => {
-          if (!gameInfo) return;
+        concatLatestFrom(() => this.store.select(selectGameInfoState)),
+        tap(([{ meme }, { stage, sessionId }]) => {
+          if (!stage || !sessionId) return;
           console.log('Select Winner', meme);
 
-          this.roundResultsService.selectWinMeme(meme.id, gameInfo);
+          this.roundResultsService.selectWinMeme(meme.id, stage, sessionId);
         })
       );
     },

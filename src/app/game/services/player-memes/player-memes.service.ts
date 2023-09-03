@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { distinctUntilChanged, map } from 'rxjs';
 import { SocketService } from '../socket/socket.service';
-import { IGameInfo } from '../../models/socket.model';
+import { Stage } from '../../models/game-info.model';
 
 @Injectable({
   providedIn: 'root',
@@ -25,16 +25,16 @@ export class PlayerMemesService {
     );
   }
 
-  selectMeme(id: number, gameInfo: IGameInfo) {
-    if (gameInfo.stage !== '2') {
+  selectMeme(id: number, stage: Stage, sessionId: number) {
+    if (stage !== Stage.two) {
       return;
     }
-    const selectMemeObj: any = {
+    const selectMemeObj = {
       action: 'game_action',
       gameAction: {
-        sessionId: gameInfo.sessionId,
+        sessionId,
         action: 'select_meme',
-        id: id,
+        id,
       },
     };
     this.socketService.sendMessage(selectMemeObj);

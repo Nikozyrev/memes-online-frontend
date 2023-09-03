@@ -4,7 +4,7 @@ import { map, switchMap, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { situationsActions } from '../actions/situations.actions';
 import { SituationsService } from '../../services/situations/situations.service';
-import { selectGameInfo } from '../selectors/game-info.selectors';
+import { selectGameInfoState } from '../selectors/game-info.selectors';
 import { socketActions } from '../actions/socket.actions';
 
 @Injectable()
@@ -43,12 +43,16 @@ export class SituationsEffects {
     () => {
       return this.actions$.pipe(
         ofType(situationsActions.selectSituation),
-        concatLatestFrom(() => this.store.select(selectGameInfo)),
-        tap(([{ situation }, gameInfo]) => {
-          if (!gameInfo) return;
+        concatLatestFrom(() => this.store.select(selectGameInfoState)),
+        tap(([{ situation }, { stage, sessionId }]) => {
+          if (!stage || !sessionId) return;
           console.log('Select Situation', situation);
 
-          this.situationsService.selectSituation(situation.id, gameInfo);
+          this.situationsService.selectSituation(
+            situation.id,
+            stage,
+            sessionId
+          );
         })
       );
     },

@@ -1,5 +1,9 @@
-import { IGameInfo } from '../../models/socket.model';
+import { Stage } from '../../models/game-info.model';
 
 export interface IGameInfoState {
-  gameInfo: IGameInfo | null;
+  sessionId: number | null;
+  stage: Stage | null;
+  round: string | null;
+  second: string | null;
+  error: string | null;
 }

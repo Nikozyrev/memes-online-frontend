@@ -4,7 +4,7 @@ import { map, switchMap, tap } from 'rxjs';
 import { playerMemesActions } from '../actions/player-memes.actions';
 import { PlayerMemesService } from '../../services/player-memes/player-memes.service';
 import { socketActions } from '../actions/socket.actions';
-import { selectGameInfo } from '../selectors/game-info.selectors';
+import { selectGameInfoState } from '../selectors/game-info.selectors';
 import { Store } from '@ngrx/store';
 
 @Injectable()
@@ -43,12 +43,12 @@ export class PlayerMemesEffects {
     () => {
       return this.actions$.pipe(
         ofType(playerMemesActions.selectMeme),
-        concatLatestFrom(() => this.store.select(selectGameInfo)),
-        tap(([{ meme }, gameInfo]) => {
-          if (!gameInfo) return;
+        concatLatestFrom(() => this.store.select(selectGameInfoState)),
+        tap(([{ meme }, { stage, sessionId }]) => {
+          if (!stage || !sessionId) return;
           console.log('Select Meme', meme);
 
-          this.playerMemesService.selectMeme(meme.id, gameInfo);
+          this.playerMemesService.selectMeme(meme.id, stage, sessionId);
         })
       );
     },

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { distinctUntilChanged, map } from 'rxjs';
 import { SocketService } from '../socket/socket.service';
-import { IGameInfo } from '../../models/socket.model';
+import { Stage } from '../../models/game-info.model';
 
 @Injectable({
   providedIn: 'root',
@@ -27,14 +27,14 @@ export class RoundResultsService {
     );
   }
 
-  selectWinMeme(memeId: number, gameInfo: IGameInfo) {
-    if (gameInfo.stage !== '3') {
+  selectWinMeme(memeId: number, stage: Stage, sessionId: number) {
+    if (stage !== Stage.three) {
       return;
     }
     const selectWinnerMemeObj = {
       action: 'game_action',
       gameAction: {
-        sessionId: gameInfo.sessionId,
+        sessionId,
         action: 'select_winner_meme',
         id: memeId,
       },

@@ -3,7 +3,11 @@ import { IGameInfoState } from '../models/game-info.model';
 import { gameInfoActions } from '../actions/game-info.actions';
 
 const initialState: IGameInfoState = {
-  gameInfo: null,
+  sessionId: null,
+  stage: null,
+  round: null,
+  second: null,
+  error: null,
 };
 
 const gameInfoFeature = createFeature({
@@ -12,7 +16,7 @@ const gameInfoFeature = createFeature({
     initialState,
     on(
       gameInfoActions.getInfoSuccess,
-      (state, { gameInfo }): IGameInfoState => ({ ...state, gameInfo })
+      (state, { gameInfo }): IGameInfoState => ({ ...state, ...gameInfo })
     )
   ),
 });

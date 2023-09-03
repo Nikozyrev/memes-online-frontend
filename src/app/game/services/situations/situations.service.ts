@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { distinctUntilChanged, map } from 'rxjs';
 import { SocketService } from '../socket/socket.service';
-import { IGameInfo } from '../../models/socket.model';
+import { Stage } from '../../models/game-info.model';
 
 @Injectable({
   providedIn: 'root',
@@ -25,16 +25,16 @@ export class SituationsService {
     );
   }
 
-  selectSituation(id: number, gameInfo: IGameInfo) {
-    if (gameInfo.stage !== '1') {
+  selectSituation(id: number, stage: Stage, sessionId: number) {
+    if (stage !== Stage.one) {
       return;
     }
     const selectSituationObj = {
       action: 'game_action',
       gameAction: {
-        sessionId: gameInfo.sessionId,
+        sessionId,
         action: 'select_situation',
-        id: id,
+        id,
       },
     };
     this.socketService.sendMessage(selectSituationObj);
