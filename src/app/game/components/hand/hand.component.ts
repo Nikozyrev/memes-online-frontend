@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { IMeme } from '../../models/meme.model';
 import { playerMemesActions } from '../../store/actions/player-memes.actions';
-import { selectHand } from '../../store/selectors/game-info.selectors';
+import { selectHand } from '../../store/selectors/player-memes.selectors';
 
 @Component({
   selector: 'app-hand',

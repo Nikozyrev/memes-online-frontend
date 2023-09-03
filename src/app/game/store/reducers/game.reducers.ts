@@ -17,7 +17,7 @@ import {
 export const gameReducer = combineReducers({
   [gameStatusFeatureKey]: gameStatusReducer,
   [gameInfoFeatureKey]: gameInfoReducer,
-  // [playerMemesFeatureKey]: playerMemesReducer,
+  [playerMemesFeatureKey]: playerMemesReducer,
   // [situationsFeatureKey]: situationsReducer,
   // [roundResultsFeatureKey]: roundResultsReducer,
 });

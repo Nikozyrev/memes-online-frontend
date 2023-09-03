@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IMeme } from '../../models/meme.model';
 import { Store } from '@ngrx/store';
-import { selectSelectedMeme } from '../../store/selectors/game-info.selectors';
+import { selectSelectedMeme } from '../../store/selectors/player-memes.selectors';
 
 @Component({
   selector: 'app-selected-meme',

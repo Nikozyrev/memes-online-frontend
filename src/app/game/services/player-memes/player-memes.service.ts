@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { distinctUntilChanged, map } from 'rxjs';
 import { SocketService } from '../socket/socket.service';
 import { IGameInfo } from '../../models/socket.model';
 
@@ -10,7 +10,19 @@ export class PlayerMemesService {
   constructor(private socketService: SocketService) {}
 
   getMemes() {
-    return this.socketService.getGameState().pipe(map(({ hand }) => hand));
+    return this.socketService.getGameState().pipe(
+      map(({ hand }) => hand ?? []),
+      distinctUntilChanged((prev, current) =>
+        current.every(({ id }, i) => id === prev[i]?.id)
+      )
+    );
+  }
+
+  getSelectedMeme() {
+    return this.socketService.getGameState().pipe(
+      map(({ selectedMeme }) => selectedMeme),
+      distinctUntilChanged((prev, current) => current?.id === prev?.id)
+    );
   }
 
   selectMeme(id: number, gameInfo: IGameInfo) {

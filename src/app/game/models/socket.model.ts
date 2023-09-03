@@ -15,7 +15,7 @@ export interface IGameInfo {
   round: string;
   stage: Stage;
   second: string;
-  hand: Meme[];
+  hand: Meme[] | null;
   winHand: Meme[];
   users: User[];
   situations: Situation[];

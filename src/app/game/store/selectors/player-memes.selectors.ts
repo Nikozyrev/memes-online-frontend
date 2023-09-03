@@ -6,7 +6,7 @@ export const selectPlayerMemesState = createSelector(
   (state) => state.playerMemes
 );
 
-export const selectMemesHand = createSelector(
+export const selectHand = createSelector(
   selectPlayerMemesState,
   (state) => state.memesHand
 );

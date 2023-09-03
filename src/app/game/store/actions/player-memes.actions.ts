@@ -7,6 +7,9 @@ export const playerMemesActions = createActionGroup({
     'Get Memes': emptyProps(),
     'Get Memes Success': props<{ memes: IMeme[] }>(),
     'Get Memes Error': props<{ error: string }>(),
+    'Get Selected Meme': emptyProps(),
+    'Get Selected Meme Success': props<{ meme: IMeme | null }>(),
+    'Get Selected Meme Error': props<{ error: string }>(),
     'Select Meme': props<{ meme: IMeme }>(),
   },
 });
