@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
-import { map, switchMap, tap } from 'rxjs';
+import { combineLatest, map, switchMap, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { selectGameInfoState } from '../selectors/game-info.selectors';
+import { selectStage } from '../selectors/game-info.selectors';
 import { RoundResultsService } from '../../services/round-results/round-results.service';
 import { roundResultsActions } from '../actions/round-results.actions';
 import { socketActions } from '../actions/socket.actions';
+import { selectSessionId } from '../selectors/game-status.selectors';
 
 @Injectable()
 export class RoundResultsEffects {
@@ -43,7 +44,12 @@ export class RoundResultsEffects {
     () => {
       return this.actions$.pipe(
         ofType(roundResultsActions.selectWinner),
-        concatLatestFrom(() => this.store.select(selectGameInfoState)),
+        concatLatestFrom(() =>
+          combineLatest({
+            stage: this.store.select(selectStage),
+            sessionId: this.store.select(selectSessionId),
+          })
+        ),
         tap(([{ meme }, { stage, sessionId }]) => {
           if (!stage || !sessionId) return;
           console.log('Select Winner', meme);

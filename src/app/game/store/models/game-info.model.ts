@@ -1,9 +1,9 @@
 import { Stage } from '../../models/game-info.model';
+import { IUser } from '../../models/user.model';
 
 export interface IGameInfoState {
-  sessionId: number | null;
-  stage: Stage | null;
   round: string | null;
+  stage: Stage | null;
   second: string | null;
-  error: string | null;
+  activeUser: IUser | null;
 }

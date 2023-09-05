@@ -20,7 +20,7 @@ export class HandComponent {
 
   selectMeme(meme: IMeme) {
     if (!this.isActive) {
-      console.log(`Can't select meme. Stage is not 2.`);
+      console.log(`Нельзя выбрать мем.`);
       return;
     }
     this.store.dispatch(playerMemesActions.selectMeme({ meme }));

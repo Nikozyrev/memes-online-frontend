@@ -1,9 +1,10 @@
+import { IUser } from './user.model';
+
 export interface IGameInfo {
-  sessionId: number | null;
   stage: Stage | null;
   round: string | null;
   second: string | null;
-  error: string | null;
+  activeUser: IUser | null;
 }
 
 export enum Stage {

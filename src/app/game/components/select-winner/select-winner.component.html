@@ -4,6 +4,7 @@
     [meme]="roundMeme.meme"
     class="card"
     [ngClass]="{
+      canSelect: canSelect,
       winner:
         state.roundWinner?.meme?.id &&
         roundMeme.meme.id === state.roundWinner?.meme?.id

@@ -2,8 +2,11 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { socketActions } from '../../store/actions/socket.actions';
 import { Observable } from 'rxjs';
-import { selectIsConnected } from '../../store/selectors/game-status.selectors';
-import { selectSessionId } from '../../store/selectors/game-info.selectors';
+import {
+  selectIsConnected,
+  selectIsUser,
+} from '../../store/selectors/game-status.selectors';
+import { selectSessionId } from '../../store/selectors/game-status.selectors';
 
 @Component({
   selector: 'app-enter-game',
@@ -16,6 +19,7 @@ export class EnterGameComponent {
   sessionId = 0;
 
   isConnected: Observable<boolean> = this.store.select(selectIsConnected);
+  isUser: Observable<boolean> = this.store.select(selectIsUser);
   sessionIdJoined: Observable<number | null | undefined> =
     this.store.select(selectSessionId);
 

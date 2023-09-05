@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY, map, of, switchMap, tap } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs';
+import { Store } from '@ngrx/store';
 import { socketActions } from '../actions/socket.actions';
 import { SocketService } from '../../services/socket/socket.service';
-import { Store } from '@ngrx/store';
-import { selectSessionId } from '../selectors/game-info.selectors';
+import { selectSessionId } from '../selectors/game-status.selectors';
+import { GameStatusService } from '../../services/game-status/game-status.service';
 
 @Injectable()
 export class SocketEffects {
@@ -36,41 +37,56 @@ export class SocketEffects {
     { dispatch: false }
   );
 
-  attachUser$ = createEffect(
-    () => {
-      return this.actions$.pipe(
-        ofType(socketActions.attachUser),
-        tap(({ login }) => {
-          this.socketService.attachUser(login);
-        })
-      );
-    },
-    { dispatch: false }
-  );
+  attachUser$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(socketActions.attachUser),
+      switchMap(({ login }) => {
+        return this.gameStatusService
+          .attachUser(login)
+          .pipe(
+            map(({ success, user, error }) =>
+              success
+                ? socketActions.attachUserSuccess({ user })
+                : socketActions.attachUserError({ error: error! })
+            )
+          );
+      })
+    );
+  });
 
-  createSession$ = createEffect(
-    () => {
-      return this.actions$.pipe(
-        ofType(socketActions.createSession),
-        tap(() => {
-          this.socketService.createSession();
-        })
-      );
-    },
-    { dispatch: false }
-  );
+  createSession$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(socketActions.createSession),
+      switchMap(() => {
+        return this.gameStatusService
+          .createSession()
+          .pipe(
+            map(({ success, error, session }) =>
+              success
+                ? socketActions.createSessionSuccess({ session })
+                : socketActions.createSessionError({ error: error! })
+            )
+          );
+      })
+    );
+  });
 
-  joinSession$ = createEffect(
-    () => {
-      return this.actions$.pipe(
-        ofType(socketActions.joinSession),
-        tap(({ sessionId }) => {
-          this.socketService.joinSession(sessionId);
-        })
-      );
-    },
-    { dispatch: false }
-  );
+  joinSession$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(socketActions.joinSession),
+      switchMap(({ sessionId }) => {
+        return this.gameStatusService
+          .joinSession(sessionId)
+          .pipe(
+            map(({ success, error, session }) =>
+              success
+                ? socketActions.joinSessionSuccess({ session })
+                : socketActions.joinSessionError({ error: error! })
+            )
+          );
+      })
+    );
+  });
 
   unpauseSession$ = createEffect(
     () => {
@@ -84,7 +100,7 @@ export class SocketEffects {
             );
             return;
           }
-          this.socketService.unpauseSession(sessionId);
+          this.gameStatusService.unpauseSession(sessionId);
         })
       );
     },
@@ -94,6 +110,7 @@ export class SocketEffects {
   constructor(
     private actions$: Actions,
     private store: Store,
-    private socketService: SocketService
+    private socketService: SocketService,
+    private gameStatusService: GameStatusService
   ) {}
 }

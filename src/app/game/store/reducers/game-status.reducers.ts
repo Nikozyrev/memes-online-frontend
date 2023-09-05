@@ -4,6 +4,9 @@ import { socketActions } from '../actions/socket.actions';
 
 const initialState: IGameStatusState = {
   connected: false,
+  user: null,
+  error: null,
+  sessionId: null,
 };
 
 const gameStatusFeature = createFeature({
@@ -17,6 +20,24 @@ const gameStatusFeature = createFeature({
     on(
       socketActions.disconnected,
       (state): IGameStatusState => ({ ...state, connected: false })
+    ),
+    on(
+      socketActions.attachUserSuccess,
+      (state, { user }): IGameStatusState => ({ ...state, user })
+    ),
+    on(
+      socketActions.createSessionSuccess,
+      (state, { session }): IGameStatusState => ({
+        ...state,
+        sessionId: session.id,
+      })
+    ),
+    on(
+      socketActions.joinSessionSuccess,
+      (state, { session }): IGameStatusState => ({
+        ...state,
+        sessionId: session.id,
+      })
     )
   ),
 });

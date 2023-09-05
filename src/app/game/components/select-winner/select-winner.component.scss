@@ -10,9 +10,12 @@
 .card {
   max-width: fit-content;
   flex: 0 1 10%;
-  cursor: pointer;
+
+  &.canSelect {
+    cursor: pointer;
+  }
 
   &.winner {
-    border: 2px solid orange;
+    border: 5px solid orange;
   }
 }
