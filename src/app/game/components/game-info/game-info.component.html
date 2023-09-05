@@ -1,4 +1,5 @@
 <div class="game-info" *ngIf="gameInfo | async as gameInfo">
   <div class="stage">Stage: {{ gameInfo.stage }}</div>
   <div class="timer">Timer: {{ gameInfo.timer }}</div>
+  <div class="active-user">Active User: {{ gameInfo.activeUser?.name }}</div>
 </div>
