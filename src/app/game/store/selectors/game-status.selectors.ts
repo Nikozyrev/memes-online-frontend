@@ -16,6 +16,8 @@ export const selectUser = createSelector(
   (state) => state.user
 );
 
+export const selectIsUser = createSelector(selectUser, (state) => !!state);
+
 export const selectUserId = createSelector(selectUser, (state) => state?.id);
 
 export const selectSessionId = createSelector(
