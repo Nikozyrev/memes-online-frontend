@@ -5,6 +5,7 @@ import {
   ActionTypes,
   IAttachUserBody,
   ICreateSessionBody,
+  IJoinSessionBody,
 } from '../../models/socket.model';
 
 @Injectable({
@@ -16,17 +17,6 @@ export class GameStatusService {
   attachUser(login: string) {
     this.socketService.sendMessage({ action: 'attach_user', value: login });
     return this.getAttachUserStatus();
-  }
-
-  private getAttachUserStatus() {
-    return this.socketService.getMessageBody().pipe(
-      filter(
-        (body): body is IAttachUserBody =>
-          body.action === ActionTypes.attachUser
-      ),
-      map(({ success, error, user }) => ({ success, error, user })),
-      take(1)
-    );
   }
 
   createSession() {
@@ -56,11 +46,50 @@ export class GameStatusService {
     return this.getCreateSessionStatus();
   }
 
+  joinSession(sessionId: number) {
+    const joinSessionMsgObj = { action: 'join_session', value: sessionId };
+    this.socketService.sendMessage(joinSessionMsgObj);
+    return this.getJoinSessionStatus();
+  }
+
+  unpauseSession(sessionId: number) {
+    const unpauseMsgObj = {
+      action: 'game_action',
+      gameAction: {
+        sessionId,
+        action: 'unpause_session',
+      },
+    };
+    this.socketService.sendMessage(unpauseMsgObj);
+  }
+
+  private getAttachUserStatus() {
+    return this.socketService.getMessageBody().pipe(
+      filter(
+        (body): body is IAttachUserBody =>
+          body.action === ActionTypes.attachUser
+      ),
+      map(({ success, error, user }) => ({ success, error, user })),
+      take(1)
+    );
+  }
+
   private getCreateSessionStatus() {
     return this.socketService.getMessageBody().pipe(
       filter(
         (body): body is ICreateSessionBody =>
           body.action === ActionTypes.createSession
+      ),
+      map(({ success, error, session }) => ({ success, error, session })),
+      take(1)
+    );
+  }
+
+  private getJoinSessionStatus() {
+    return this.socketService.getMessageBody().pipe(
+      filter(
+        (body): body is IJoinSessionBody =>
+          body.action === ActionTypes.joinSession
       ),
       map(({ success, error, session }) => ({ success, error, session })),
       take(1)

@@ -15,6 +15,8 @@ export const socketActions = createActionGroup({
     'Create Session Success': props<{ session: ISession }>(),
     'Create Session Error': props<{ error: string }>(),
     'Join Session': props<{ sessionId: number }>(),
+    'Join Session Success': props<{ session: ISession }>(),
+    'Join Session Error': props<{ error: string }>(),
     'Unpause Session': emptyProps(),
   },
 });

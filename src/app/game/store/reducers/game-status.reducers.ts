@@ -31,6 +31,13 @@ const gameStatusFeature = createFeature({
         ...state,
         sessionId: session.id,
       })
+    ),
+    on(
+      socketActions.joinSessionSuccess,
+      (state, { session }): IGameStatusState => ({
+        ...state,
+        sessionId: session.id,
+      })
     )
   ),
 });

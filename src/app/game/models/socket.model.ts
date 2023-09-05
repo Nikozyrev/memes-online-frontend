@@ -35,10 +35,18 @@ export interface ICreateSessionBody {
   session: ISession;
 }
 
+export interface IJoinSessionBody {
+  action: ActionTypes.joinSession;
+  success: boolean;
+  error: string | null;
+  session: ISession;
+}
+
 export type ISocketMessageBody =
   | IGameMessageBody
   | IAttachUserBody
-  | ICreateSessionBody;
+  | ICreateSessionBody
+  | IJoinSessionBody;
 
 export interface IGameInfoFromServer {
   sessionId: number | null;

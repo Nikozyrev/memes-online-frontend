@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
-import { map, switchMap, take, tap } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs';
+import { Store } from '@ngrx/store';
 import { socketActions } from '../actions/socket.actions';
 import { SocketService } from '../../services/socket/socket.service';
-import { Store } from '@ngrx/store';
 import { selectSessionId } from '../selectors/game-status.selectors';
 import { GameStatusService } from '../../services/game-status/game-status.service';
 
@@ -71,17 +71,22 @@ export class SocketEffects {
     );
   });
 
-  joinSession$ = createEffect(
-    () => {
-      return this.actions$.pipe(
-        ofType(socketActions.joinSession),
-        tap(({ sessionId }) => {
-          this.socketService.joinSession(sessionId);
-        })
-      );
-    },
-    { dispatch: false }
-  );
+  joinSession$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(socketActions.joinSession),
+      switchMap(({ sessionId }) => {
+        return this.gameStatusService
+          .joinSession(sessionId)
+          .pipe(
+            map(({ success, error, session }) =>
+              success
+                ? socketActions.joinSessionSuccess({ session })
+                : socketActions.joinSessionError({ error: error! })
+            )
+          );
+      })
+    );
+  });
 
   unpauseSession$ = createEffect(
     () => {
@@ -95,7 +100,7 @@ export class SocketEffects {
             );
             return;
           }
-          this.socketService.unpauseSession(sessionId);
+          this.gameStatusService.unpauseSession(sessionId);
         })
       );
     },

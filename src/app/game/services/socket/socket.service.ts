@@ -57,22 +57,6 @@ export class SocketService {
     );
   }
 
-  joinSession(sessionId: number) {
-    const joinSessionMsgObj = { action: 'join_session', value: sessionId };
-    this.sendMessage(joinSessionMsgObj);
-  }
-
-  unpauseSession(sessionId: number) {
-    const unpauseMsgObj = {
-      action: 'game_action',
-      gameAction: {
-        sessionId,
-        action: 'unpause_session',
-      },
-    };
-    this.sendMessage(unpauseMsgObj);
-  }
-
   disconnectSocket() {
     if (this.stompClient.active) {
       this.stompClient.deactivate();
