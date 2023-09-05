@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY, map, of, switchMap, tap } from 'rxjs';
+import { EMPTY, map, of, switchMap, take, tap } from 'rxjs';
 import { socketActions } from '../actions/socket.actions';
 import { SocketService } from '../../services/socket/socket.service';
 import { Store } from '@ngrx/store';
@@ -36,17 +36,24 @@ export class SocketEffects {
     { dispatch: false }
   );
 
-  attachUser$ = createEffect(
-    () => {
-      return this.actions$.pipe(
-        ofType(socketActions.attachUser),
-        tap(({ login }) => {
-          this.socketService.attachUser(login);
-        })
-      );
-    },
-    { dispatch: false }
-  );
+  attachUser$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(socketActions.attachUser),
+      tap(({ login }) => {
+        this.socketService.attachUser(login);
+      }),
+      switchMap(() => {
+        return this.socketService.getAttachUserStatus().pipe(
+          take(1),
+          map(({ success, user, error }) =>
+            success
+              ? socketActions.attachUserSuccess({ user })
+              : socketActions.attachUserError({ error: error! })
+          )
+        );
+      })
+    );
+  });
 
   createSession$ = createEffect(
     () => {

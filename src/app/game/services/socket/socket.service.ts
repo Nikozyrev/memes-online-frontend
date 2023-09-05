@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
 import { RxStomp } from '@stomp/rx-stomp';
 import { RxStompConfig } from '@stomp/rx-stomp';
-import { map } from 'rxjs';
+import { filter, map, tap } from 'rxjs';
 import SockJS from 'sockjs-client/dist/sockjs.min.js';
-import { ISocketMessageBody } from '../../models/socket.model';
+import {
+  ActionTypes,
+  IAttachUserBody,
+  IGameMessageBody,
+  ISocketMessageBody,
+} from '../../models/socket.model';
 
 @Injectable({
   providedIn: 'root',
@@ -28,17 +33,40 @@ export class SocketService {
     return this.stompClient.connected$;
   }
 
-  getGameState() {
+  getMessageBody() {
     return this.stompClient
       .watch({
         destination: `/user/${this.simpSessionId}/queue`,
       })
       .pipe(
+        // tap((msg) => console.log(msg)),
         map(({ body }) => {
-          const bodyParsed = JSON.parse(body) as ISocketMessageBody;
-          return bodyParsed.gameInfo;
+          const bodyParsed: ISocketMessageBody = JSON.parse(body);
+          return bodyParsed;
         })
       );
+  }
+
+  getGameState() {
+    return this.getMessageBody().pipe(
+      filter(
+        (body): body is IGameMessageBody =>
+          body.action === ActionTypes.gameMessage
+      ),
+      map((body) => body.gameInfo)
+      // tap((msg) => console.log(msg))
+    );
+  }
+
+  getAttachUserStatus() {
+    return this.getMessageBody().pipe(
+      filter(
+        (body): body is IAttachUserBody =>
+          body.action === ActionTypes.attachUser
+      ),
+      map(({ success, error, user }) => ({ success, error, user }))
+      // tap((msg) => console.log(msg))
+    );
   }
 
   joinSession(sessionId: number) {
