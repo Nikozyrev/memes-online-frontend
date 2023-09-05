@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY, map, of, switchMap, take, tap } from 'rxjs';
+import { map, switchMap, take, tap } from 'rxjs';
 import { socketActions } from '../actions/socket.actions';
 import { SocketService } from '../../services/socket/socket.service';
 import { Store } from '@ngrx/store';
-import { selectSessionId } from '../selectors/game-info.selectors';
+import { selectSessionId } from '../selectors/game-status.selectors';
 
 @Injectable()
 export class SocketEffects {

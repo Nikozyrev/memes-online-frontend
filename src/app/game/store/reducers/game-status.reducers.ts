@@ -5,6 +5,8 @@ import { socketActions } from '../actions/socket.actions';
 const initialState: IGameStatusState = {
   connected: false,
   user: null,
+  error: null,
+  sessionId: null,
 };
 
 const gameStatusFeature = createFeature({

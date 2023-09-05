@@ -10,3 +10,13 @@ export const selectIsConnected = createSelector(
   selectGameStatusState,
   (state) => state.connected
 );
+
+export const selectUser = createSelector(
+  selectGameStatusState,
+  (state) => state.user
+);
+
+export const selectSessionId = createSelector(
+  selectGameStatusState,
+  (state) => state.sessionId
+);

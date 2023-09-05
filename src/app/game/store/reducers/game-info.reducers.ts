@@ -3,11 +3,10 @@ import { IGameInfoState } from '../models/game-info.model';
 import { gameInfoActions } from '../actions/game-info.actions';
 
 const initialState: IGameInfoState = {
-  sessionId: null,
   stage: null,
   round: null,
   second: null,
-  error: null,
+  activeUser: null,
 };
 
 const gameInfoFeature = createFeature({

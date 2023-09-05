@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { SocketService } from '../socket/socket.service';
 import { distinctUntilChanged, map } from 'rxjs';
+import { SocketService } from '../socket/socket.service';
 import { IGameInfo } from '../../models/game-info.model';
 
 @Injectable({
@@ -12,18 +12,18 @@ export class GameInfoService {
   getGameInfo() {
     return this.socketService.getGameState().pipe(
       map(
-        ({ round, second, error, sessionId, stage }): IGameInfo => ({
-          sessionId,
+        ({ round, second, stage, activeUser }): IGameInfo => ({
           stage,
           round,
           second,
-          error,
+          activeUser,
         })
       ),
-      distinctUntilChanged((prev, current) =>
-        (Object.keys(current) as (keyof IGameInfo)[]).every(
-          (key) => current[key] === prev[key]
-        )
+      distinctUntilChanged(
+        (prev, current) => current.second === prev.second
+        // (Object.keys(current) as (keyof IGameInfo)[]).every(
+        //   (key) => current[key] === prev[key]
+        // )
       )
     );
   }

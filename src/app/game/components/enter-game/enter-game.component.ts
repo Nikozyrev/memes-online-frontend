@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { socketActions } from '../../store/actions/socket.actions';
 import { Observable } from 'rxjs';
 import { selectIsConnected } from '../../store/selectors/game-status.selectors';
-import { selectSessionId } from '../../store/selectors/game-info.selectors';
+import { selectSessionId } from '../../store/selectors/game-status.selectors';
 
 @Component({
   selector: 'app-enter-game',
