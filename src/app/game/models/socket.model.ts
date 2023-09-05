@@ -11,6 +11,11 @@ export enum ActionTypes {
   gameMessage = 'game_message',
 }
 
+export interface ISession {
+  id: number;
+  url: string;
+}
+
 export interface IGameMessageBody {
   action: ActionTypes.gameMessage;
   gameInfo: IGameInfoFromServer;
@@ -23,7 +28,17 @@ export interface IAttachUserBody {
   user: IUser;
 }
 
-export type ISocketMessageBody = IGameMessageBody | IAttachUserBody;
+export interface ICreateSessionBody {
+  action: ActionTypes.createSession;
+  success: boolean;
+  error: string | null;
+  session: ISession;
+}
+
+export type ISocketMessageBody =
+  | IGameMessageBody
+  | IAttachUserBody
+  | ICreateSessionBody;
 
 export interface IGameInfoFromServer {
   sessionId: number | null;

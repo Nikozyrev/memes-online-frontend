@@ -5,7 +5,6 @@ import { filter, map, tap } from 'rxjs';
 import SockJS from 'sockjs-client/dist/sockjs.min.js';
 import {
   ActionTypes,
-  IAttachUserBody,
   IGameMessageBody,
   ISocketMessageBody,
 } from '../../models/socket.model';
@@ -58,50 +57,9 @@ export class SocketService {
     );
   }
 
-  getAttachUserStatus() {
-    return this.getMessageBody().pipe(
-      filter(
-        (body): body is IAttachUserBody =>
-          body.action === ActionTypes.attachUser
-      ),
-      map(({ success, error, user }) => ({ success, error, user }))
-      // tap((msg) => console.log(msg))
-    );
-  }
-
   joinSession(sessionId: number) {
     const joinSessionMsgObj = { action: 'join_session', value: sessionId };
     this.sendMessage(joinSessionMsgObj);
-  }
-
-  attachUser(login: string) {
-    this.sendMessage({ action: 'attach_user', value: login });
-  }
-
-  createSession() {
-    this.sendMessage({
-      action: 'create_session',
-      sessionSettings: {
-        active: true,
-        paused: true,
-        finished: false,
-
-        autoStep: false,
-
-        maxPlayers: 100,
-
-        situationDeckSize: 8,
-        situationsToChooseCount: 2,
-        memeDeckSize: 12,
-        memesPerHand: 4,
-        sendMessageTime: 250,
-
-        stageOneTime: 15,
-        stageTwoTime: 15,
-        stageThreeTime: 15,
-        stageFourTime: 15,
-      },
-    });
   }
 
   unpauseSession(sessionId: number) {

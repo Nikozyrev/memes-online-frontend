@@ -5,6 +5,7 @@ import { socketActions } from '../actions/socket.actions';
 import { SocketService } from '../../services/socket/socket.service';
 import { Store } from '@ngrx/store';
 import { selectSessionId } from '../selectors/game-status.selectors';
+import { GameStatusService } from '../../services/game-status/game-status.service';
 
 @Injectable()
 export class SocketEffects {
@@ -39,33 +40,36 @@ export class SocketEffects {
   attachUser$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(socketActions.attachUser),
-      tap(({ login }) => {
-        this.socketService.attachUser(login);
-      }),
-      switchMap(() => {
-        return this.socketService.getAttachUserStatus().pipe(
-          take(1),
-          map(({ success, user, error }) =>
-            success
-              ? socketActions.attachUserSuccess({ user })
-              : socketActions.attachUserError({ error: error! })
-          )
-        );
+      switchMap(({ login }) => {
+        return this.gameStatusService
+          .attachUser(login)
+          .pipe(
+            map(({ success, user, error }) =>
+              success
+                ? socketActions.attachUserSuccess({ user })
+                : socketActions.attachUserError({ error: error! })
+            )
+          );
       })
     );
   });
 
-  createSession$ = createEffect(
-    () => {
-      return this.actions$.pipe(
-        ofType(socketActions.createSession),
-        tap(() => {
-          this.socketService.createSession();
-        })
-      );
-    },
-    { dispatch: false }
-  );
+  createSession$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(socketActions.createSession),
+      switchMap(() => {
+        return this.gameStatusService
+          .createSession()
+          .pipe(
+            map(({ success, error, session }) =>
+              success
+                ? socketActions.createSessionSuccess({ session })
+                : socketActions.createSessionError({ error: error! })
+            )
+          );
+      })
+    );
+  });
 
   joinSession$ = createEffect(
     () => {
@@ -101,6 +105,7 @@ export class SocketEffects {
   constructor(
     private actions$: Actions,
     private store: Store,
-    private socketService: SocketService
+    private socketService: SocketService,
+    private gameStatusService: GameStatusService
   ) {}
 }
