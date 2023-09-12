@@ -7,6 +7,12 @@ export interface IGameInfo {
   activeUser: IUser | null;
 }
 
+export interface IGameStatus {
+  error: string | null;
+  paused: boolean;
+  ended: boolean;
+}
+
 export enum Stage {
   one = '1',
   two = '2',

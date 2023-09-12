@@ -7,6 +7,8 @@ const initialState: IGameStatusState = {
   user: null,
   error: null,
   sessionId: null,
+  paused: true,
+  ended: false,
 };
 
 const gameStatusFeature = createFeature({
@@ -37,6 +39,13 @@ const gameStatusFeature = createFeature({
       (state, { session }): IGameStatusState => ({
         ...state,
         sessionId: session.id,
+      })
+    ),
+    on(
+      socketActions.getGameStatusSuccess,
+      (state, { gameStatus }): IGameStatusState => ({
+        ...state,
+        ...gameStatus,
       })
     )
   ),

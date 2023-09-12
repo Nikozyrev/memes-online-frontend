@@ -107,6 +107,21 @@ export class SocketEffects {
     { dispatch: false }
   );
 
+  getGameStatus$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(socketActions.connected),
+      switchMap(() => {
+        return this.gameStatusService.getGameStatus().pipe(
+          map((gameStatus) =>
+            socketActions.getGameStatusSuccess({
+              gameStatus,
+            })
+          )
+        );
+      })
+    );
+  });
+
   constructor(
     private actions$: Actions,
     private store: Store,

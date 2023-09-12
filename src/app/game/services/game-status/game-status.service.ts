@@ -1,18 +1,36 @@
 import { Injectable } from '@angular/core';
+import { distinctUntilChanged, filter, map, take } from 'rxjs';
 import { SocketService } from '../socket/socket.service';
-import { filter, map, take } from 'rxjs';
 import {
   ActionTypes,
   IAttachUserBody,
   ICreateSessionBody,
   IJoinSessionBody,
 } from '../../models/socket.model';
+import { IGameStatus } from '../../models/game-info.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GameStatusService {
   constructor(private socketService: SocketService) {}
+
+  getGameStatus() {
+    return this.socketService.getGameState().pipe(
+      map(
+        ({ error, paused, ended }): IGameStatus => ({
+          error,
+          paused,
+          ended,
+        })
+      ),
+      distinctUntilChanged((prev, current) =>
+        (Object.keys(current) as (keyof typeof current)[]).every(
+          (key) => current[key] === prev[key]
+        )
+      )
+    );
+  }
 
   attachUser(login: string) {
     this.socketService.sendMessage({ action: 'attach_user', value: login });

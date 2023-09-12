@@ -7,6 +7,7 @@ import {
 } from '../../store/selectors/game-info.selectors';
 import { socketActions } from '../../store/actions/socket.actions';
 import { selectIsSituationSelected } from '../../store/selectors/situations.selectors';
+import { selectIsInGame } from '../../store/selectors/game-status.selectors';
 
 @Component({
   selector: 'app-game',
@@ -15,6 +16,7 @@ import { selectIsSituationSelected } from '../../store/selectors/situations.sele
 })
 export class GameComponent implements OnInit {
   state = combineLatest({
+    isInGame: this.store.select(selectIsInGame),
     currentStage: this.store.select(selectStage),
     isSituationSelected: this.store.select(selectIsSituationSelected),
     isUserActive: this.store.select(selectIsUserActive),

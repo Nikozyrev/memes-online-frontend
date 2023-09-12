@@ -24,7 +24,7 @@
     Joined to session id: {{ sessionIdJoined }}
   </p>
 
-  <div class="btns">
+  <div class="btns" *ngIf="state.isConnected">
     <button [disabled]="state.isUser" (click)="attachUser(loginInput.value)">
       Attach User
     </button>

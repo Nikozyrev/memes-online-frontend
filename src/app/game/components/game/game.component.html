@@ -1,23 +1,26 @@
 <div class="game-page" *ngIf="state | async as state">
-  <app-enter-game></app-enter-game>
-  <app-game-info class="border"></app-game-info>
-  <div class="center">
-    <app-selected-meme class="border"></app-selected-meme>
-    <app-selected-situation class="border"></app-selected-situation>
-  </div>
-  <ng-container
-    *ngIf="state.currentStage === '3' || state.currentStage === '4'"
-  >
-    <app-select-winner [canSelect]="state.isUserActive"></app-select-winner>
-  </ng-container>
-  <app-hand
-    class="border"
-    [isActive]="state.currentStage === '2' && !state.isUserActive"
-  ></app-hand>
+  <app-enter-game *ngIf="!state.isInGame"></app-enter-game>
 
-  <ng-container *ngIf="state.currentStage === '1'">
-    <app-select-situation
-      *ngIf="!state.isSituationSelected && state.isUserActive"
-    ></app-select-situation>
-  </ng-container>
+  <div class="game" *ngIf="state.isInGame">
+    <app-game-info class="border"></app-game-info>
+    <div class="center">
+      <app-selected-meme class="border"></app-selected-meme>
+      <app-selected-situation class="border"></app-selected-situation>
+    </div>
+    <ng-container
+      *ngIf="state.currentStage === '3' || state.currentStage === '4'"
+    >
+      <app-select-winner [canSelect]="state.isUserActive"></app-select-winner>
+    </ng-container>
+    <app-hand
+      class="border"
+      [isActive]="state.currentStage === '2' && !state.isUserActive"
+    ></app-hand>
+
+    <ng-container *ngIf="state.currentStage === '1'">
+      <app-select-situation
+        *ngIf="!state.isSituationSelected && state.isUserActive"
+      ></app-select-situation>
+    </ng-container>
+  </div>
 </div>
