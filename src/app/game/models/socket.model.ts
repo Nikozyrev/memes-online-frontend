@@ -50,13 +50,13 @@ export type ISocketMessageBody =
 
 export interface IGameInfoFromServer {
   sessionId: number | null;
-  hostUser: IUser | null;
-  activeUser: IUser | null;
   paused: boolean;
   ended: boolean;
-  description: string;
   error: string | null;
+  hostUser: IUser | null;
+  activeUser: IUser | null;
   stageInfo: string | null;
+  description: string | null;
   round: string | null;
   stage: Stage | null;
   second: string | null;

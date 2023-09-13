@@ -35,6 +35,11 @@ export const selectIsEnded = createSelector(
   (state) => state.ended
 );
 
+export const selectError = createSelector(
+  selectGameStatusState,
+  (state) => state.error
+);
+
 export const selectIsInGame = createSelector(
   selectSessionId,
   selectIsPaused,

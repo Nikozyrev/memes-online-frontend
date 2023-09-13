@@ -7,6 +7,8 @@ const initialState: IGameInfoState = {
   round: null,
   second: null,
   activeUser: null,
+  description: null,
+  stageInfo: null,
 };
 
 const gameInfoFeature = createFeature({

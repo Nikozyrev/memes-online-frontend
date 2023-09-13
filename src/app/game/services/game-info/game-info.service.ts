@@ -12,11 +12,20 @@ export class GameInfoService {
   getGameInfo() {
     return this.socketService.getGameState().pipe(
       map(
-        ({ round, second, stage, activeUser }): IGameInfo => ({
+        ({
+          round,
+          second,
+          stage,
+          activeUser,
+          stageInfo,
+          description,
+        }): IGameInfo => ({
           stage,
           round,
           second,
           activeUser,
+          stageInfo,
+          description,
         })
       ),
       distinctUntilChanged(

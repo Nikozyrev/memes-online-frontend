@@ -6,4 +6,6 @@ export interface IGameInfoState {
   stage: Stage | null;
   second: string | null;
   activeUser: IUser | null;
+  stageInfo: string | null;
+  description: string | null;
 }

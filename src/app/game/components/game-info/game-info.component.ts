@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { combineLatest } from 'rxjs';
 import {
-  selectActiveUser,
-  selectStage,
-  selectTimer,
+  selectGameInfoState,
+  selectIsUserActive,
 } from '../../store/selectors/game-info.selectors';
+import { selectError } from '../../store/selectors/game-status.selectors';
 
 @Component({
   selector: 'app-game-info',
@@ -13,11 +12,9 @@ import {
   styleUrls: ['./game-info.component.scss'],
 })
 export class GameInfoComponent {
-  gameInfo = combineLatest({
-    stage: this.store.select(selectStage),
-    timer: this.store.select(selectTimer),
-    activeUser: this.store.select(selectActiveUser),
-  });
+  gameInfo = this.store.select(selectGameInfoState);
+  error = this.store.select(selectError);
+  isUserActive = this.store.select(selectIsUserActive);
 
   constructor(private store: Store) {}
 }

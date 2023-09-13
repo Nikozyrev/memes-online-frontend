@@ -17,6 +17,16 @@ export const selectTimer = createSelector(
   (state) => state.second
 );
 
+export const selectStageInfo = createSelector(
+  selectGameInfoState,
+  (state) => state.stageInfo
+);
+
+export const selectDescription = createSelector(
+  selectGameInfoState,
+  (state) => state.description
+);
+
 export const selectActiveUser = createSelector(
   selectGameInfoState,
   (state) => state.activeUser

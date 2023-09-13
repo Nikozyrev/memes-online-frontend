@@ -1,5 +1,22 @@
 <div class="game-info" *ngIf="gameInfo | async as gameInfo">
-  <div class="stage">Stage: {{ gameInfo.stage }}</div>
-  <div class="timer">Timer: {{ gameInfo.timer }}</div>
-  <div class="active-user">Active User: {{ gameInfo.activeUser?.name }}</div>
+  <div class="up">
+    <div class="round">Round: {{ gameInfo.round }}</div>
+    <div class="stage">Stage: {{ gameInfo.stage }}</div>
+    <div class="timer">Timer: {{ gameInfo.second }}</div>
+    <div class="active-user">
+      Active User:
+      <span [ngClass]="{ active: (isUserActive | async) }">
+        {{ (isUserActive | async) ? "You" : gameInfo.activeUser?.name }}
+      </span>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="stage-info" *ngIf="gameInfo.stageInfo">
+      {{ gameInfo.stageInfo }}
+    </div>
+    <div class="description" *ngIf="gameInfo.description">
+      {{ gameInfo.description }}
+    </div>
+    <div class="error" *ngIf="error | async as error">{{ error }}</div>
+  </div>
 </div>
