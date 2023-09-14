@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
-import { combineLatest, map, switchMap, tap } from 'rxjs';
+import { EMPTY, combineLatest, filter, map, switchMap, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { selectStage } from '../selectors/game-info.selectors';
+import {
+  selectIsUserActive,
+  selectStage,
+} from '../selectors/game-info.selectors';
 import { RoundResultsService } from '../../services/round-results/round-results.service';
 import { roundResultsActions } from '../actions/round-results.actions';
 import { socketActions } from '../actions/socket.actions';
@@ -33,6 +36,23 @@ export class RoundResultsEffects {
           map((roundWinner) =>
             roundResultsActions.getRoundWinnerSuccess({
               roundWinner,
+            })
+          )
+        );
+      })
+    );
+  });
+
+  getRoundPreWinner$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(socketActions.connected),
+      switchMap(() => {
+        return this.roundResultsService.getRoundPreWinner().pipe(
+          concatLatestFrom(() => this.store.select(selectIsUserActive)),
+          filter(([, isUserActive]) => isUserActive),
+          map(([roundPreWinner]) =>
+            roundResultsActions.getRoundPreWinnerSuccess({
+              roundPreWinner,
             })
           )
         );

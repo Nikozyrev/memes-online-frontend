@@ -12,6 +12,7 @@
 .card {
   max-width: fit-content;
   flex: 0 1 10%;
+  border-radius: 5%;
 
   &.canSelect {
     cursor: pointer;
@@ -19,6 +20,9 @@
 
   &.winner {
     border: 5px solid $app-green;
-    border-radius: 5%;
+  }
+
+  &.preWinner {
+    border: 5px solid $app-green;
   }
 }

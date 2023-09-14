@@ -68,4 +68,5 @@ export interface IGameInfoFromServer {
   selectedMeme: IMeme | null;
   selectedMemes: ISelectedMeme[] | null;
   currentRoundWinner: ISelectedMeme | null;
+  currentRoundPreWinner: ISelectedMeme | null;
 }

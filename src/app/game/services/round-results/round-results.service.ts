@@ -28,6 +28,15 @@ export class RoundResultsService {
     );
   }
 
+  getRoundPreWinner() {
+    return this.socketService.getGameState().pipe(
+      map(({ currentRoundPreWinner }) => currentRoundPreWinner),
+      distinctUntilChanged(
+        (prev, current) => current?.meme.id === prev?.meme.id
+      )
+    );
+  }
+
   selectWinMeme(memeId: number, stage: Stage, sessionId: number) {
     if (stage !== Stage.three) {
       return;

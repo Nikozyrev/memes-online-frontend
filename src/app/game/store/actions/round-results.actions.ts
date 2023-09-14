@@ -10,6 +10,11 @@ export const roundResultsActions = createActionGroup({
     'Get Round Winner': emptyProps(),
     'Get Round Winner Success': props<{ roundWinner: ISelectedMeme | null }>(),
     'Get Round Winner Error': props<{ error: string }>(),
+    'Get Round Pre Winner': emptyProps(),
+    'Get Round Pre Winner Success': props<{
+      roundPreWinner: ISelectedMeme | null;
+    }>(),
+    'Get Round Pre Winner Error': props<{ error: string }>(),
     'Select Winner': props<{ meme: IMeme }>(),
   },
 });

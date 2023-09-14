@@ -15,3 +15,8 @@ export const selectRoundWinner = createSelector(
   selectRoundResultsState,
   (state) => state.roundWinner
 );
+
+export const selectRoundPreWinner = createSelector(
+  selectRoundResultsState,
+  (state) => state.roundPreWinner
+);
