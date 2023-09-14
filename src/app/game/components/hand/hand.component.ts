@@ -1,9 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { IMeme } from '../../models/meme.model';
 import { playerMemesActions } from '../../store/actions/player-memes.actions';
-import { selectHand } from '../../store/selectors/player-memes.selectors';
+import {
+  selectHand,
+  selectSelectedMemeId,
+} from '../../store/selectors/player-memes.selectors';
 
 @Component({
   selector: 'app-hand',
@@ -14,7 +16,8 @@ export class HandComponent {
   @Input({ required: true })
   isActive!: boolean;
 
-  memes: Observable<IMeme[]> = this.store.select(selectHand);
+  memes = this.store.select(selectHand);
+  selectedMemeId = this.store.select(selectSelectedMemeId);
 
   constructor(private store: Store) {}
 

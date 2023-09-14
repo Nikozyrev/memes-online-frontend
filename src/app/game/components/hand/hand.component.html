@@ -8,6 +8,9 @@
     *ngFor="let meme of memes | async"
     [meme]="meme"
     class="card"
+    [ngClass]="{
+      selected: meme.id === (selectedMemeId | async)
+    }"
     (click)="selectMeme(meme)"
   />
 </div>

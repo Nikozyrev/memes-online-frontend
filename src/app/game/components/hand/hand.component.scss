@@ -28,4 +28,9 @@
 .card {
   max-width: fit-content;
   flex: 0 1 15%;
+
+  &.selected {
+    border: 4px solid green;
+    border-radius: 5%;
+  }
 }
