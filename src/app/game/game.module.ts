@@ -4,6 +4,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 import { GameRoutingModule } from './game-routing.module';
+import { GamePageComponent } from './pages/game-page/game-page.component';
 import { GameComponent } from './components/game/game.component';
 import { MemeComponent } from './components/meme/meme.component';
 import { HandComponent } from './components/hand/hand.component';
@@ -24,6 +25,7 @@ import { RoundResultsEffects } from './store/effects/round-results.effects';
 
 @NgModule({
   declarations: [
+    GamePageComponent,
     GameComponent,
     HandComponent,
     GameInfoComponent,
