@@ -1,3 +1,5 @@
+@import "../../../../variables.scss";
+
 .select-winner {
   max-height: 30vh;
   padding: 5px;
@@ -16,6 +18,7 @@
   }
 
   &.winner {
-    border: 5px solid orange;
+    border: 5px solid $app-green;
+    border-radius: 5%;
   }
 }
