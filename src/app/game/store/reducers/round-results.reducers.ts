@@ -5,6 +5,7 @@ import { roundResultsActions } from '../actions/round-results.actions';
 const initialState: IRoundResultsState = {
   roundMemes: [],
   roundWinner: null,
+  roundPreWinner: null,
 };
 
 const roundResultsFeature = createFeature({
@@ -23,6 +24,13 @@ const roundResultsFeature = createFeature({
       (state, { roundWinner }): IRoundResultsState => ({
         ...state,
         roundWinner,
+      })
+    ),
+    on(
+      roundResultsActions.getRoundPreWinnerSuccess,
+      (state, { roundPreWinner }): IRoundResultsState => ({
+        ...state,
+        roundPreWinner,
       })
     )
   ),

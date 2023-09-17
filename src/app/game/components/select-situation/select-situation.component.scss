@@ -1,25 +1,15 @@
-:host {
-  position: absolute;
-}
-
-.modal {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(128, 128, 128, 0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.title {
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .select-situation {
-  padding: 20px;
   display: flex;
   gap: 5px;
+  border-radius: 10px;
 }
 
 .situation {
+  display: block;
   cursor: pointer;
 }

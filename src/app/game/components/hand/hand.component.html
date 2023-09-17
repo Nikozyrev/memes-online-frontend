@@ -1,10 +1,15 @@
-<div class="hand">
+<div
+  class="hand"
+  [ngClass]="{
+    active: isActive
+  }"
+>
   <app-meme
     *ngFor="let meme of memes | async"
     [meme]="meme"
     class="card"
     [ngClass]="{
-      active: isActive
+      selected: meme.id === (selectedMemeId | async)
     }"
     (click)="selectMeme(meme)"
   />

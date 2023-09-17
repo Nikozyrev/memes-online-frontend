@@ -15,3 +15,8 @@ export const selectSelectedMeme = createSelector(
   selectPlayerMemesState,
   (state) => state.selectedMeme
 );
+
+export const selectSelectedMemeId = createSelector(
+  selectSelectedMeme,
+  (state) => state?.id ?? null
+);

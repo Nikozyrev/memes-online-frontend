@@ -1,5 +1,19 @@
-.game-info {
+.up {
   display: flex;
   justify-content: center;
   gap: 10px;
+}
+
+.bottom {
+  text-align: center;
+}
+
+.active-user {
+  span {
+    padding: 0 5px;
+
+    &.active {
+      background-color: green;
+    }
+  }
 }

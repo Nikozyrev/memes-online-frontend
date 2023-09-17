@@ -1,6 +1,7 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { IUser } from '../../models/user.model';
 import { ISession } from '../../models/socket.model';
+import { IGameStatus } from '../../models/game-info.model';
 
 export const socketActions = createActionGroup({
   source: 'Socket',
@@ -18,5 +19,6 @@ export const socketActions = createActionGroup({
     'Join Session Success': props<{ session: ISession }>(),
     'Join Session Error': props<{ error: string }>(),
     'Unpause Session': emptyProps(),
+    'Get Game Status Success': props<{ gameStatus: IGameStatus }>(),
   },
 });

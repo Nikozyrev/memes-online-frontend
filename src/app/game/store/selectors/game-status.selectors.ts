@@ -24,3 +24,25 @@ export const selectSessionId = createSelector(
   selectGameStatusState,
   (state) => state.sessionId
 );
+
+export const selectIsPaused = createSelector(
+  selectGameStatusState,
+  (state) => state.paused
+);
+
+export const selectIsEnded = createSelector(
+  selectGameStatusState,
+  (state) => state.ended
+);
+
+export const selectError = createSelector(
+  selectGameStatusState,
+  (state) => state.error
+);
+
+export const selectIsInGame = createSelector(
+  selectSessionId,
+  selectIsPaused,
+  selectIsEnded,
+  (sessionId, isPaused, isEnded) => !!sessionId && !isPaused && !isEnded
+);

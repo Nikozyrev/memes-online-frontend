@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { socketActions } from '../../store/actions/socket.actions';
-import { Observable } from 'rxjs';
+import { combineLatest } from 'rxjs';
 import {
   selectIsConnected,
   selectIsUser,
@@ -18,10 +18,11 @@ export class EnterGameComponent {
 
   sessionId = 0;
 
-  isConnected: Observable<boolean> = this.store.select(selectIsConnected);
-  isUser: Observable<boolean> = this.store.select(selectIsUser);
-  sessionIdJoined: Observable<number | null | undefined> =
-    this.store.select(selectSessionId);
+  state = combineLatest({
+    isConnected: this.store.select(selectIsConnected),
+    isUser: this.store.select(selectIsUser),
+    sessionIdJoined: this.store.select(selectSessionId),
+  });
 
   constructor(private store: Store) {}
 

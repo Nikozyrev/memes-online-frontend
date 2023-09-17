@@ -1,13 +1,13 @@
-<div class="enter-game">
+<div class="enter-game" *ngIf="state | async as state">
   <p>
     Socket connected:
-    {{ (isConnected | async) ? "Yes" : "No" }}
+    {{ state.isConnected ? "Yes" : "No" }}
   </p>
   <p>Login:</p>
   <input
     #loginInput
     type="text"
-    [disabled]="isUser | async"
+    [disabled]="state.isUser"
     [value]="login"
     (change)="login = loginInput.value"
   />
@@ -20,16 +20,23 @@
     (change)="setSessionId(sessionIdInput.value)"
   />
 
-  <p *ngIf="sessionIdJoined | async as sessionIdJoined">
+  <p *ngIf="state.sessionIdJoined as sessionIdJoined">
     Joined to session id: {{ sessionIdJoined }}
   </p>
 
-  <div class="btns">
-    <button [disabled]="isUser | async" (click)="attachUser(loginInput.value)">
+  <div class="btns" *ngIf="state.isConnected">
+    <button [disabled]="state.isUser" (click)="attachUser(loginInput.value)">
       Attach User
     </button>
-    <button (click)="createSession()">Create session</button>
+    <button (click)="createSession()" [disabled]="!!state.sessionIdJoined">
+      Create session
+    </button>
     <button (click)="unpauseSession()">Unpause session</button>
-    <button (click)="joinSession(sessionId)">Join session</button>
+    <button
+      (click)="joinSession(sessionId)"
+      [disabled]="!!state.sessionIdJoined"
+    >
+      Join session
+    </button>
   </div>
 </div>

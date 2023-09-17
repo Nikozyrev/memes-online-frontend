@@ -1,0 +1,7 @@
+<div class="game-page">
+  <app-game *ngIf="isInGame | async; else enterGame" />
+
+  <ng-template #enterGame>
+    <app-enter-game />
+  </ng-template>
+</div>
