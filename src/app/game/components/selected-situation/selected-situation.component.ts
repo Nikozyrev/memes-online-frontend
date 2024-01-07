@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, Signal } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ISituation } from '../../models/situation.model';
 import { selectSelectedSituation } from '../../store/selectors/situations.selectors';
@@ -10,9 +9,9 @@ import { selectSelectedSituation } from '../../store/selectors/situations.select
   styleUrls: ['./selected-situation.component.scss'],
 })
 export class SelectedSituationComponent {
-  selectedSituation: Observable<ISituation | null> = this.store.select(
-    selectSelectedSituation
-  );
+  public selectedSituation: Signal<ISituation | null>;
 
-  constructor(private store: Store) {}
+  constructor(private store: Store) {
+    this.selectedSituation = this.store.selectSignal(selectSelectedSituation);
+  }
 }

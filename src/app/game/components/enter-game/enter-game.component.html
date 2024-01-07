@@ -1,42 +1,35 @@
-<div class="enter-game" *ngIf="state | async as state">
+<div class="enter-game">
   <p>
     Socket connected:
-    {{ state.isConnected ? "Yes" : "No" }}
+    {{ isConnected() ? "Yes" : "No" }}
   </p>
+
   <p>Login:</p>
   <input
     #loginInput
     type="text"
-    [disabled]="state.isUser"
+    [disabled]="isUser()"
     [value]="login"
     (change)="login = loginInput.value"
   />
 
-  <p>Session id to join:</p>
-  <input
-    #sessionIdInput
-    type="text"
-    [value]="sessionId"
-    (change)="setSessionId(sessionIdInput.value)"
+  <ng-container *ngIf="isUser()">
+    <p>Session id to join:</p>
+    <input
+      #sessionIdInput
+      type="text"
+      [value]="sessionId"
+      (change)="setSessionId(sessionIdInput.value)"
+    />
+  </ng-container>
+
+  <p *ngIf="sessionIdJoined()">Joined to session id: {{ sessionIdJoined() }}</p>
+
+  <app-enter-game-controls
+    *ngIf="isConnected()"
+    [isSessionJoined]="!!sessionIdJoined()"
+    [isUser]="isUser()"
+    [sessionId]="sessionId"
+    [username]="login"
   />
-
-  <p *ngIf="state.sessionIdJoined as sessionIdJoined">
-    Joined to session id: {{ sessionIdJoined }}
-  </p>
-
-  <div class="btns" *ngIf="state.isConnected">
-    <button [disabled]="state.isUser" (click)="attachUser(loginInput.value)">
-      Attach User
-    </button>
-    <button (click)="createSession()" [disabled]="!!state.sessionIdJoined">
-      Create session
-    </button>
-    <button (click)="unpauseSession()">Unpause session</button>
-    <button
-      (click)="joinSession(sessionId)"
-      [disabled]="!!state.sessionIdJoined"
-    >
-      Join session
-    </button>
-  </div>
 </div>

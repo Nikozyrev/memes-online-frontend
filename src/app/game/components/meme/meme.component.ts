@@ -7,5 +7,6 @@ import { IMeme } from '../../models/meme.model';
   styleUrls: ['./meme.component.scss'],
 })
 export class MemeComponent {
-  @Input() meme?: IMeme;
+  @Input({ required: true })
+  public meme?: IMeme;
 }

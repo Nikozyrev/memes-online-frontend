@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Signal, computed } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { IMeme } from '../../models/meme.model';
 import { selectRoundResultsState } from '../../store/selectors/round-results.selectors';
 import { roundResultsActions } from '../../store/actions/round-results.actions';
+import { IRoundResultsState } from '../../store/models/round-results-state.model';
 
 @Component({
   selector: 'app-select-winner',
@@ -11,13 +12,25 @@ import { roundResultsActions } from '../../store/actions/round-results.actions';
 })
 export class SelectWinnerComponent {
   @Input({ required: true })
-  canSelect!: boolean;
+  public canSelect!: boolean;
 
-  roundState = this.store.select(selectRoundResultsState);
+  public roundState: Signal<IRoundResultsState>;
 
-  constructor(private store: Store) {}
+  public roundMemes = computed(() => this.roundState().roundMemes);
 
-  selectWinner(meme: IMeme) {
+  public roundWinnerId = computed(() => this.roundState().roundWinner?.meme.id);
+
+  public roundPreWinnerId = computed(
+    () => this.roundState().roundPreWinner?.meme.id
+  );
+
+  public noMemes = computed(() => !this.roundState().roundMemes.length);
+
+  constructor(private store: Store) {
+    this.roundState = this.store.selectSignal(selectRoundResultsState);
+  }
+
+  public selectWinner(meme: IMeme) {
     if (!this.canSelect) {
       console.log('Нельзя выбирать победителя.');
       return;

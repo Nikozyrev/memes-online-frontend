@@ -1,7 +1,7 @@
 <div class="selected-meme">
   <app-meme
     class="meme"
-    *ngIf="selectedMeme | async as selectedMeme; else noMeme"
+    *ngIf="selectedMeme() as selectedMeme; else noMeme"
     [meme]="selectedMeme"
   ></app-meme>
 </div>

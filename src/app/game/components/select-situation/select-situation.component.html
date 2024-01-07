@@ -1,14 +1,12 @@
 <h3 class="title">Select situation</h3>
-<div class="select-situation" *ngIf="situations | async as situations">
+<div class="select-situation">
   <app-situation
     class="situation"
-    *ngFor="let situation of situations"
+    *ngFor="let situation of situations()"
     [situation]="situation"
     (click)="selectSituation(situation)"
   >
   </app-situation>
 
-  <div class="no-situations" *ngIf="!situations.length">
-    Ситуации отсутствуют.
-  </div>
+  <div class="no-situations" *ngIf="noSituations()">Ситуации отсутствуют.</div>
 </div>

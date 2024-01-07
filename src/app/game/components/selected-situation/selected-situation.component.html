@@ -1,8 +1,8 @@
 <div class="selected-situation">
   <app-situation
-    *ngIf="selectedSituation | async as selectedSituation; else noSituation"
-    [situation]="selectedSituation"
-  ></app-situation>
+    *ngIf="selectedSituation() as situation; else noSituation"
+    [situation]="situation"
+  />
 </div>
 
 <ng-template #noSituation>

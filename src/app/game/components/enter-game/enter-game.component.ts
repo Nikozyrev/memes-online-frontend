@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { socketActions } from '../../store/actions/socket.actions';
-import { combineLatest } from 'rxjs';
 import {
   selectIsConnected,
   selectIsUser,
@@ -14,35 +12,16 @@ import { selectSessionId } from '../../store/selectors/game-status.selectors';
   styleUrls: ['./enter-game.component.scss'],
 })
 export class EnterGameComponent {
-  login = '';
+  public login = '';
+  public sessionId = 0;
 
-  sessionId = 0;
-
-  state = combineLatest({
-    isConnected: this.store.select(selectIsConnected),
-    isUser: this.store.select(selectIsUser),
-    sessionIdJoined: this.store.select(selectSessionId),
-  });
+  public isConnected = this.store.selectSignal(selectIsConnected);
+  public isUser = this.store.selectSignal(selectIsUser);
+  public sessionIdJoined = this.store.selectSignal(selectSessionId);
 
   constructor(private store: Store) {}
 
-  attachUser(login: string) {
-    this.store.dispatch(socketActions.attachUser({ login }));
-  }
-
-  createSession() {
-    this.store.dispatch(socketActions.createSession());
-  }
-
-  unpauseSession() {
-    this.store.dispatch(socketActions.unpauseSession());
-  }
-
-  joinSession(sessionId: number) {
-    this.store.dispatch(socketActions.joinSession({ sessionId }));
-  }
-
-  setSessionId(value: string) {
+  public setSessionId(value: string) {
     this.sessionId = Number(value);
   }
 }

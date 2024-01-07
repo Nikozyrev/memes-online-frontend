@@ -1,0 +1,13 @@
+.btns {
+  margin-top: 5px;
+  display: flex;
+  gap: 5px;
+
+  button {
+    padding: 2px;
+
+    &:not(:disabled) {
+      cursor: pointer;
+    }
+  }
+}

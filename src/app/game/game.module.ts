@@ -22,6 +22,7 @@ import { SocketEffects } from './store/effects/socket.effects';
 import { GameInfoEffects } from './store/effects/game-info.effects';
 import { EnterGameComponent } from './components/enter-game/enter-game.component';
 import { RoundResultsEffects } from './store/effects/round-results.effects';
+import { EnterGameControlsComponent } from './components/enter-game-controls/enter-game-controls.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { RoundResultsEffects } from './store/effects/round-results.effects';
     SelectedMemeComponent,
     SelectWinnerComponent,
     EnterGameComponent,
+    EnterGameControlsComponent,
   ],
   imports: [
     CommonModule,
