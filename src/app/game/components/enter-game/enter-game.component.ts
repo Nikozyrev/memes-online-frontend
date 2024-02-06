@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
   selectIsConnected,
@@ -12,16 +12,12 @@ import { selectSessionId } from '../../store/selectors/game-status.selectors';
   styleUrls: ['./enter-game.component.scss'],
 })
 export class EnterGameComponent {
+  private store = inject(Store);
+
   public login = '';
   public sessionId = 0;
 
   public isConnected = this.store.selectSignal(selectIsConnected);
   public isUser = this.store.selectSignal(selectIsUser);
   public sessionIdJoined = this.store.selectSignal(selectSessionId);
-
-  constructor(private store: Store) {}
-
-  public setSessionId(value: string) {
-    this.sessionId = Number(value);
-  }
 }

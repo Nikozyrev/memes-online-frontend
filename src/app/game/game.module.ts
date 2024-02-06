@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
+import { FormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 
 import { GameRoutingModule } from './game-routing.module';
@@ -42,6 +43,7 @@ import { EnterGameControlsComponent } from './components/enter-game-controls/ent
   imports: [
     CommonModule,
     GameRoutingModule,
+    FormsModule,
     StoreModule.forFeature(gameFeatureKey, gameReducer),
     EffectsModule.forFeature([
       SocketEffects,

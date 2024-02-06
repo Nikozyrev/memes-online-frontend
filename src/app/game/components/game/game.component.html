@@ -2,19 +2,19 @@
   <app-game-info class="border" />
 
   <div class="center">
-    <app-select-situation
-      *ngIf="canSelectSituation(); else selectedMemeAndSituation"
-    />
-
-    <ng-template #selectedMemeAndSituation>
-      <app-selected-meme class="border" *ngIf="!isUserActive()" />
+    @if (canSelectSituation()) {
+      <app-select-situation />
+    } @else {
+      @if (!isUserActive()) {
+        <app-selected-meme class="border"/>
+      }
       <app-selected-situation class="border" />
-    </ng-template>
+    }
   </div>
 
-  <ng-container *ngIf="canShowWinner()">
+  @if (canShowWinner()) {
     <app-select-winner [canSelect]="isUserActive()" />
-  </ng-container>
+  }
 
   <app-hand [isActive]="canSelectMeme()" />
 </div>

@@ -8,7 +8,7 @@ import { socketActions } from '../../store/actions/socket.actions';
   styleUrls: ['./game-page.component.scss'],
 })
 export class GamePageComponent implements OnInit {
-  isInGame = this.store.select(selectIsInGame);
+  public isInGame = this.store.selectSignal(selectIsInGame);
 
   constructor(private store: Store) {}
 

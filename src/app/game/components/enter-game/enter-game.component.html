@@ -6,30 +6,30 @@
 
   <p>Login:</p>
   <input
-    #loginInput
     type="text"
     [disabled]="isUser()"
-    [value]="login"
-    (change)="login = loginInput.value"
+    [(ngModel)]="login"
   />
 
-  <ng-container *ngIf="isUser()">
+  @if (isUser()) {
     <p>Session id to join:</p>
     <input
-      #sessionIdInput
-      type="text"
-      [value]="sessionId"
-      (change)="setSessionId(sessionIdInput.value)"
+      type="number"
+      [valueAsNumber]="true"
+      [(ngModel)]="sessionId"
     />
-  </ng-container>
+  }
 
-  <p *ngIf="sessionIdJoined()">Joined to session id: {{ sessionIdJoined() }}</p>
+  @if (sessionIdJoined(); as sessionIdJoined) {
+    <p>Joined to session id: {{ sessionIdJoined }}</p>
+  }
 
-  <app-enter-game-controls
-    *ngIf="isConnected()"
-    [isSessionJoined]="!!sessionIdJoined()"
-    [isUser]="isUser()"
-    [sessionId]="sessionId"
-    [username]="login"
-  />
+  @if (isConnected()) {
+    <app-enter-game-controls
+      [isSessionJoined]="!!sessionIdJoined()"
+      [isUser]="isUser()"
+      [sessionId]="sessionId"
+      [username]="login"
+    />
+  }
 </div>

@@ -1,4 +1,4 @@
-import { Component, Signal, computed } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
   selectIsUserActive,
@@ -13,32 +13,24 @@ import { Stage } from '../../models/game-info.model';
   styleUrls: ['./game.component.scss'],
 })
 export class GameComponent {
-  public currentStage: Signal<Stage | null>;
+  private store = inject(Store);
 
-  public isSituationSelected: Signal<boolean>;
-
-  public isUserActive: Signal<boolean>;
+  public currentStage = this.store.selectSignal(selectStage);
+  public isSituationSelected = this.store.selectSignal(selectIsSituationSelected);
+  public isUserActive = this.store.selectSignal(selectIsUserActive);
 
   public canSelectSituation = computed(
     () =>
-      this.currentStage() === '1' &&
+      this.currentStage() === Stage.one &&
       this.isUserActive() &&
       !this.isSituationSelected()
   );
 
   public canShowWinner = computed(
-    () => this.currentStage() === '3' || this.currentStage() === '4'
+    () => this.currentStage() === Stage.three || this.currentStage() === Stage.four
   );
 
   public canSelectMeme = computed(
-    () => this.currentStage() === '2' && !this.isUserActive()
+    () => this.currentStage() === Stage.two && !this.isUserActive()
   );
-
-  constructor(private store: Store) {
-    this.currentStage = this.store.selectSignal(selectStage);
-    this.isSituationSelected = this.store.selectSignal(
-      selectIsSituationSelected
-    );
-    this.isUserActive = this.store.selectSignal(selectIsUserActive);
-  }
 }

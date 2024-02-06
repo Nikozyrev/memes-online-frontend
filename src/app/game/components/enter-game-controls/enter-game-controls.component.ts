@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { socketActions } from '../../store/actions/socket.actions';
 
@@ -8,26 +8,17 @@ import { socketActions } from '../../store/actions/socket.actions';
   styleUrls: ['./enter-game-controls.component.scss'],
 })
 export class EnterGameControlsComponent {
-  @Input({ required: true })
-  public isSessionJoined = false;
+  private store = inject(Store);
 
-  @Input({ required: true })
-  public isUser = false;
+  public isSessionJoined = input.required<boolean>();
+  public isUser = input.required<boolean>();
+  public username = input.required<string>();
+  public sessionId = input.required<number>();
 
-  @Input({ required: true })
-  public username = '';
-
-  @Input({ required: true })
-  public sessionId!: number;
-
-  public get canCreateSession() {
-    return this.isUser && !this.isSessionJoined;
-  }
-
-  constructor(private store: Store) {}
+  public canCreateSession = computed(() => this.isUser() && !this.isSessionJoined());
 
   public attachUser() {
-    this.store.dispatch(socketActions.attachUser({ login: this.username }));
+    this.store.dispatch(socketActions.attachUser({ login: this.username() }));
   }
 
   public createSession() {
@@ -40,7 +31,7 @@ export class EnterGameControlsComponent {
 
   public joinSession() {
     this.store.dispatch(
-      socketActions.joinSession({ sessionId: this.sessionId })
+      socketActions.joinSession({ sessionId: this.sessionId() })
     );
   }
 }

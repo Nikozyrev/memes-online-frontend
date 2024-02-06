@@ -1,12 +1,12 @@
 <div class="btns">
-  <button [disabled]="isUser" (click)="attachUser()">Attach User</button>
-  <button [disabled]="!canCreateSession" (click)="createSession()">
+  <button [disabled]="isUser()" (click)="attachUser()">Attach User</button>
+  <button [disabled]="!canCreateSession()" (click)="createSession()">
     Create session
   </button>
-  <button [disabled]="!canCreateSession" (click)="joinSession()">
+  <button [disabled]="!canCreateSession()" (click)="joinSession()">
     Join session
   </button>
-  <button [disabled]="!isSessionJoined" (click)="unpauseSession()">
+  <button [disabled]="!isSessionJoined()" (click)="unpauseSession()">
     Unpause session
   </button>
 </div>
