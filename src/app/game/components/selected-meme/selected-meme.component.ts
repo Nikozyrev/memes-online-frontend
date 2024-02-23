@@ -1,4 +1,4 @@
-import { Component, Signal } from '@angular/core';
+import { Component, Signal, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { IMeme } from '../../models/meme.model';
 import { selectSelectedMeme } from '../../store/selectors/player-memes.selectors';
@@ -9,9 +9,7 @@ import { selectSelectedMeme } from '../../store/selectors/player-memes.selectors
   styleUrls: ['./selected-meme.component.scss'],
 })
 export class SelectedMemeComponent {
-  public selectedMeme: Signal<IMeme | null>;
+  private store = inject(Store);
 
-  constructor(private store: Store) {
-    this.selectedMeme = this.store.selectSignal(selectSelectedMeme);
-  }
+  public selectedMeme: Signal<IMeme | null> = this.store.selectSignal(selectSelectedMeme);
 }

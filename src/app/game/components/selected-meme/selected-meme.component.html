@@ -1,11 +1,10 @@
 <div class="selected-meme">
-  <app-meme
-    class="meme"
-    *ngIf="selectedMeme() as selectedMeme; else noMeme"
-    [meme]="selectedMeme"
-  ></app-meme>
+  @if (selectedMeme(); as selectedMeme) {
+    <app-meme
+      class="meme"
+      [meme]="selectedMeme"
+    />
+  } @else {
+    <div class="no-meme">Мем не выбран</div>
+  }
 </div>
-
-<ng-template #noMeme>
-  <div class="no-meme">Мем не выбран</div>
-</ng-template>
