@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { combineLatest, map, switchMap, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -10,39 +10,27 @@ import { selectSessionId } from '../selectors/game-status.selectors';
 
 @Injectable()
 export class PlayerMemesEffects {
-  getMemes$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(socketActions.connected),
-      switchMap(() => {
-        return this.playerMemesService.getMemes().pipe(
-          map((memes) =>
-            playerMemesActions.getMemesSuccess({
-              memes,
-            })
-          )
-        );
-      })
-    );
-  });
+  private actions$ = inject( Actions);
+  private store = inject(Store);
+  private playerMemesService = inject(PlayerMemesService);
 
-  getSelectedMeme$ = createEffect(() => {
-    return this.actions$.pipe(
+  getMemes$ = createEffect(() =>
+    this.actions$.pipe(
       ofType(socketActions.connected),
-      switchMap(() => {
-        return this.playerMemesService.getSelectedMeme().pipe(
-          map((meme) =>
-            playerMemesActions.getSelectedMemeSuccess({
-              meme,
-            })
-          )
-        );
-      })
-    );
-  });
+      switchMap(() => this.getMemesSuccess())
+    )
+  );
+
+  getSelectedMeme$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(socketActions.connected),
+      switchMap(() => this.getSelectedMemeSuccess())
+    )
+  );
 
   selectMeme$ = createEffect(
-    () => {
-      return this.actions$.pipe(
+    () =>
+      this.actions$.pipe(
         ofType(playerMemesActions.selectMeme),
         concatLatestFrom(() =>
           combineLatest({
@@ -56,14 +44,27 @@ export class PlayerMemesEffects {
 
           this.playerMemesService.selectMeme(meme.id, stage, sessionId);
         })
-      );
-    },
+      ),
     { dispatch: false }
   );
 
-  constructor(
-    private actions$: Actions,
-    private store: Store,
-    private playerMemesService: PlayerMemesService
-  ) {}
+  private getMemesSuccess() {
+    return this.playerMemesService.getMemes().pipe(
+      map((memes) =>
+        playerMemesActions.getMemesSuccess({
+          memes,
+        })
+      )
+    )
+  }
+
+  private getSelectedMemeSuccess() {
+    return this.playerMemesService.getSelectedMeme().pipe(
+      map((meme) =>
+        playerMemesActions.getSelectedMemeSuccess({
+          meme,
+        })
+      )
+    )
+  }
 }

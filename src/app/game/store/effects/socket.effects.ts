@@ -9,31 +9,31 @@ import { GameStatusService } from '../../services/game-status/game-status.servic
 
 @Injectable()
 export class SocketEffects {
-  connectSocket$ = createEffect(() => {
-    return this.actions$.pipe(
+  connectSocket$ = createEffect(() =>
+    this.actions$.pipe(
       ofType(socketActions.connect),
-      switchMap(() => {
-        return this.socketService.connectSocket().pipe(
-          map((status) => {
-            if (status === 1) {
-              return socketActions.connected();
-            }
-            return socketActions.disconnected();
-          })
-        );
-      })
-    );
-  });
+      switchMap(() =>
+        this.socketService
+          .connectSocket()
+          .pipe(
+            map((status) =>
+              status === 1
+                ? socketActions.connected()
+                : socketActions.disconnected()
+            )
+          )
+      )
+    )
+  );
 
   extractSimpSessionId$ = createEffect(
-    () => {
-      return this.actions$.pipe(
+    () =>
+      this.actions$.pipe(
         ofType(socketActions.connected),
         tap(() => {
           this.socketService.extractSimpSessionId();
         })
-      );
-    },
+      ),
     { dispatch: false }
   );
 
