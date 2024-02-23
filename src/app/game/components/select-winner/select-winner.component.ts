@@ -1,4 +1,4 @@
-import { Component, Input, Signal, computed } from '@angular/core';
+import { Component, Signal, computed, inject, input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { IMeme } from '../../models/meme.model';
 import { selectRoundResultsState } from '../../store/selectors/round-results.selectors';
@@ -11,10 +11,11 @@ import { IRoundResultsState } from '../../store/models/round-results-state.model
   styleUrls: ['./select-winner.component.scss'],
 })
 export class SelectWinnerComponent {
-  @Input({ required: true })
-  public canSelect!: boolean;
+  private store = inject(Store);
 
-  public roundState: Signal<IRoundResultsState>;
+  public canSelect = input.required<boolean>();
+
+  public roundState: Signal<IRoundResultsState> = this.store.selectSignal(selectRoundResultsState);
 
   public roundMemes = computed(() => this.roundState().roundMemes);
 
@@ -24,14 +25,8 @@ export class SelectWinnerComponent {
     () => this.roundState().roundPreWinner?.meme.id
   );
 
-  public noMemes = computed(() => !this.roundState().roundMemes.length);
-
-  constructor(private store: Store) {
-    this.roundState = this.store.selectSignal(selectRoundResultsState);
-  }
-
   public selectWinner(meme: IMeme) {
-    if (!this.canSelect) {
+    if (!this.canSelect()) {
       console.log('Нельзя выбирать победителя.');
       return;
     }

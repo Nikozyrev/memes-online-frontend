@@ -1,17 +1,19 @@
 <div class="select-winner">
-  <app-meme
-    *ngFor="let roundMeme of roundMemes()"
-    [meme]="roundMeme.meme"
-    class="card"
-    [ngClass]="{
-      canSelect: canSelect,
-      winner: roundMeme.meme.id === roundWinnerId(),
-      preWinner: roundMeme.meme.id === roundPreWinnerId()
-    }"
-    (click)="selectWinner(roundMeme.meme)"
-  />
-
-  <div class="no-memes" *ngIf="noMemes()">
-    В этом раунде не выбрано ни одного мема.
-  </div>
+  @for (roundMeme of roundMemes(); track roundMeme.meme.id) {
+    <app-meme
+      [meme]="roundMeme.meme"
+      class="card"
+      [ngClass]="{
+        canSelect: canSelect(),
+        winner: roundMeme.meme.id === roundWinnerId(),
+        preWinner: roundMeme.meme.id === roundPreWinnerId()
+      }"
+      (click)="selectWinner(roundMeme.meme)"
+    />
+  }
+  @empty {
+    <div class="no-memes">
+      В этом раунде не выбрано ни одного мема.
+    </div>
+  }
 </div>
