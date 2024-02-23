@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { ISituation } from '../../models/situation.model';
 
 @Component({
@@ -7,6 +7,5 @@ import { ISituation } from '../../models/situation.model';
   styleUrls: ['./situation.component.scss'],
 })
 export class SituationComponent {
-  @Input({ required: true })
-  situation!: ISituation | null;
+  public situation = input.required<ISituation>();
 }
