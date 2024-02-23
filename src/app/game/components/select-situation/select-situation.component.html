@@ -1,12 +1,13 @@
 <h3 class="title">Select situation</h3>
 <div class="select-situation">
-  <app-situation
-    class="situation"
-    *ngFor="let situation of situations()"
-    [situation]="situation"
-    (click)="selectSituation(situation)"
-  >
-  </app-situation>
-
-  <div class="no-situations" *ngIf="noSituations()">Ситуации отсутствуют.</div>
+  @for (situation of situations(); track situation.id) {
+    <app-situation
+      class="situation"
+      [situation]="situation"
+      (click)="selectSituation(situation)"
+    />
+  }
+  @empty {
+    <div class="no-situations">Ситуации отсутствуют.</div>
+  }
 </div>
