@@ -17,13 +17,9 @@ export class SocketService {
     reconnectDelay: 200,
     webSocketFactory: () => this.socket,
   };
+  private stompClient = new RxStomp();
   private socket?: WebSocket;
-  private stompClient: RxStomp;
   private simpSessionId?: string;
-
-  constructor() {
-    this.stompClient = new RxStomp();
-  }
 
   connectSocket() {
     this.socket = new SockJS('http://localhost:8080/wsl');
@@ -76,8 +72,8 @@ export class SocketService {
       sock._transport.url
     );
     if (
-      extractedSimpSessionId != null &&
-      typeof extractedSimpSessionId[1] != 'undefined'
+      extractedSimpSessionId &&
+      extractedSimpSessionId[1] !== undefined
     ) {
       this.simpSessionId = extractedSimpSessionId[1];
     }
