@@ -1,4 +1,4 @@
-import { Component, Input, Signal } from '@angular/core';
+import { Component, Signal, inject, input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { IMeme } from '../../models/meme.model';
 import { playerMemesActions } from '../../store/actions/player-memes.actions';
@@ -13,19 +13,15 @@ import {
   styleUrls: ['./hand.component.scss'],
 })
 export class HandComponent {
-  @Input({ required: true })
-  public isActive!: boolean;
+  private store = inject(Store);
 
-  public memes: Signal<IMeme[]>;
-  public selectedMemeId: Signal<number | null>;
+  public isActive = input.required<boolean>();
 
-  constructor(private store: Store) {
-    this.memes = this.store.selectSignal(selectHand);
-    this.selectedMemeId = this.store.selectSignal(selectSelectedMemeId);
-  }
+  public memes: Signal<IMeme[]> = this.store.selectSignal(selectHand);
+  public selectedMemeId: Signal<number | null> = this.store.selectSignal(selectSelectedMemeId);
 
   public selectMeme(meme: IMeme) {
-    if (!this.isActive) {
+    if (!this.isActive()) {
       console.log(`Нельзя выбрать мем.`);
       return;
     }
