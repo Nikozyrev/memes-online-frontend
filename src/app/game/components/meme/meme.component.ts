@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { IMeme } from '../../models/meme.model';
 
 @Component({
@@ -7,6 +7,7 @@ import { IMeme } from '../../models/meme.model';
   styleUrls: ['./meme.component.scss'],
 })
 export class MemeComponent {
-  @Input({ required: true })
-  public meme?: IMeme;
+  public meme = input.required<IMeme>();
+
+  public url = computed(() => this.meme().url);
 }
