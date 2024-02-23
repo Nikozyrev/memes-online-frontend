@@ -1,4 +1,4 @@
-import { Component, Signal } from '@angular/core';
+import { Component, Signal, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ISituation } from '../../models/situation.model';
 import { selectSelectedSituation } from '../../store/selectors/situations.selectors';
@@ -9,9 +9,7 @@ import { selectSelectedSituation } from '../../store/selectors/situations.select
   styleUrls: ['./selected-situation.component.scss'],
 })
 export class SelectedSituationComponent {
-  public selectedSituation: Signal<ISituation | null>;
+  private store = inject(Store);
 
-  constructor(private store: Store) {
-    this.selectedSituation = this.store.selectSignal(selectSelectedSituation);
-  }
+  public selectedSituation: Signal<ISituation | null> = this.store.selectSignal(selectSelectedSituation);
 }

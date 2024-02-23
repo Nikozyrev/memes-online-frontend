@@ -1,10 +1,9 @@
 <div class="selected-situation">
-  <app-situation
-    *ngIf="selectedSituation() as situation; else noSituation"
-    [situation]="situation"
-  />
+  @if (selectedSituation(); as situation) {
+    <app-situation
+      [situation]="situation"
+    />
+  } @else {
+    <div class="no-situation">Какая ситуация?!</div>
+  }
 </div>
-
-<ng-template #noSituation>
-  <div class="no-situation">Какая ситуация?!</div>
-</ng-template>
